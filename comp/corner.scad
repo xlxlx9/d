@@ -8,7 +8,8 @@ function outline2d(
     al = 1.05,
     bl = 0.75,
     ar = 0.95,
-    br = 0.66
+    br = 0.66,
+    fn = $fn
     ) = 
   let (
       p0l = [-thickness / 2, 0]
@@ -19,9 +20,27 @@ function outline2d(
     , p0r = [thickness / 2, 0]
   )
   concat(
-      bezier3(p0l, p1l, p2l)
-    , bezier3(p2r, p1r, p0r)
+      bezier3(p0l, p1l, p2l, fn=fn)
+    , bezier3(p2r, p1r, p0r, fn=fn)
   );
 
-$fn=150;
-polygon(outline2d());
+function outline2d_ext(
+    ext=10
+  , thickness=14.5
+  , height=30
+  , edge_front=4.9
+  , edge_back=3
+  , al = 1.05
+  , bl = 0.75
+  , ar = 0.95
+  , br = 0.66
+  , fn = $fn
+) =
+  concat(
+    [[-thickness / 2, -ext]],
+    outline2d(thickness, height, edge_front, edge_back,
+      al, bl, ar, br, fn),
+    [[thickness / 2, -ext]]
+  );
+
+polygon(outline2d_ext(ext=100, fn=80));
