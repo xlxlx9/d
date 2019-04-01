@@ -44,3 +44,9 @@ function outline2d_ext(
   );
 
 polygon(outline2d_ext(ext=100, fn=80));
+
+module pad_track(height=200, ptt2=2, pth3=22) {
+  linear_extrude(height=height) {
+    polygon(bezier3([0, 0], [ptt2, pth3 / 2], [0, pth3]));
+  }
+}
