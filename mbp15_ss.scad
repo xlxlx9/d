@@ -31,11 +31,5 @@ union() {
   extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
   rotate([180 + extra_deg, -18, 0])
     translate([15, -66, -20])
-      union() {
-        linear_extrude(height=CASE_WIDTH / 2)
-          polygon(outline2d_ext(ext=CASE_WIDTH / 4));
-        translate([-CASE_HEIGHT / 2 + .8, -6, 0])
-        mirror([1, 0, 0])
-        pad_track(height=CASE_WIDTH / 3);
-      }
+      corner(depth=CASE_DEPTH, width=CASE_WIDTH);
 }

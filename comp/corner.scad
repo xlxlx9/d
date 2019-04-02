@@ -43,10 +43,35 @@ function outline2d_ext(
     [[thickness / 2, -ext]]
   );
 
-polygon(outline2d_ext(ext=100, fn=80));
-
-module pad_track(height=200, ptt2=2, pth3=22) {
+module pad_track(height=200, ptt2=2, pth3=22, fn=$fn) {
   linear_extrude(height=height) {
-    polygon(bezier3([0, 0], [ptt2, pth3 / 2], [0, pth3]));
+    polygon(bezier3([0, 0], [-ptt2, pth3 / 2], [0, pth3], fn=fn));
   }
 }
+
+module corner(
+    width=300
+  , depth=500
+  , thickness=14.5
+  , height=30
+  , edge_front=4.9
+  , edge_back=3
+  , al = 1.05
+  , bl = 0.75
+  , ar = 0.95
+  , br = 0.66
+  , ptt2 = 2
+  , pth3 = 22
+  , psink = 0.6
+  , pdy = -6
+  , fn = $fn
+) {
+  union() {
+    linear_extrude(height=width)
+      polygon(outline2d_ext(ext=depth- height, fn=fn));
+    translate([-thickness / 2 + psink, pdy, 0])
+      pad_track(height=width, ptt2=ptt2, pth3=pth3, fn=fn);
+  }
+}
+
+corner(fn=80);
