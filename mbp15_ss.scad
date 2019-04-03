@@ -17,8 +17,9 @@ union() {
     , r = BASE_EDIGE_RADIUS
   );
 
-  translate([0, CASE_DEPTH / 8 - 4, BASE_WIDTH / 2])
-  rotate([0, -18, 0])
+  r0 = 4;
+  translate([-CASE_WIDTH / 40, CASE_DEPTH / 8 - 4, CASE_HEIGHT + r0])
+  rotate([0, 90, 0])
     difference() {
       minkowski() { 
         cube([2 * CASE_HEIGHT, CASE_DEPTH / 4, CASE_WIDTH / 4], center=true);
@@ -29,7 +30,7 @@ union() {
     }
   }
   extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
-  rotate([180 + extra_deg, -18, 0])
-    translate([15, -66, -20])
+  rotate([180 + extra_deg, -90, 0])
+    translate([19, -32, 17])
       corner(depth=CASE_DEPTH, width=CASE_WIDTH);
 }
