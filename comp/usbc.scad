@@ -22,10 +22,16 @@ module usbc_x(
           circle(xyr);
     }
   }
+  ht = tunnel_extend_bottom + tunnel_extend_top + height;
+  translate([0, 0, ht / 2 - tunnel_extend_bottom])
+  cube([
+      depth + 2 * tunnel_xy_padding, 
+      width + 2 * tunnel_xy_padding, 
+      ht], center=true);
 }
 
-usbc_x(xyr=3);
-translate([0, 20, 0]) usbc_x(xyr=1, extend_top=2);
+usbc_x(xyr=3, tunnel_extend_top=0);
+translate([0, 20, 0]) usbc_x(xyr=1, extend_top=2, tunnel_extend_bottom=0);
 translate([0, -20, 0]) usbc_x(width=8, height=16, xyr=1);
-translate([0, -40, 0]) usbc_x(width=8, depth=16, xyr=10);
+translate([0, -40, 0]) usbc_x(width=8, depth=16, xyr=10, tunnel_extend_top=0, extend_top=5);
 
