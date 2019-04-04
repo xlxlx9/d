@@ -11,23 +11,25 @@ module usbc_x(
   ) {
   xyr = min(xyr, depth / 2);
   xyr = min(xyr, width / 2);
-  linear_extrude(height=height + extend_top) {
-    union() {
-      if (depth > 2 * xyr)
-        square([width, depth - 2 * xyr], center=true);
-      if (width > 2 * xyr)
-        square([width - 2 * xyr, depth], center=true);
-      for (cxy = [[-1, -1], [-1, 1], [1, -1], [1, 1]]) 
-        translate([cxy[0] * (width / 2 - xyr), cxy[1] * (depth / 2 - xyr)])
-          circle(xyr);
+  union() {
+    linear_extrude(height=height + extend_top) {
+      union() {
+        if (depth > 2 * xyr)
+          square([width, depth - 2 * xyr], center=true);
+        if (width > 2 * xyr)
+          square([width - 2 * xyr, depth], center=true);
+        for (cxy = [[-1, -1], [-1, 1], [1, -1], [1, 1]]) 
+          translate([cxy[0] * (width / 2 - xyr), cxy[1] * (depth / 2 - xyr)])
+            circle(xyr);
+      }
     }
+    ht = tunnel_extend_bottom + tunnel_extend_top + height;
+    translate([0, 0, ht / 2 - tunnel_extend_bottom])
+    cube([
+        depth + 2 * tunnel_xy_padding, 
+        width + 2 * tunnel_xy_padding, 
+        ht], center=true);
   }
-  ht = tunnel_extend_bottom + tunnel_extend_top + height;
-  translate([0, 0, ht / 2 - tunnel_extend_bottom])
-  cube([
-      depth + 2 * tunnel_xy_padding, 
-      width + 2 * tunnel_xy_padding, 
-      ht], center=true);
 }
 
 usbc_x(xyr=3, tunnel_extend_top=0);
