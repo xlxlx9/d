@@ -66,6 +66,7 @@ module corner(
   , pdy = -6
   , fn = $fn
 ) {
+  translate([0, -height, 0])  // move edge of corner to y=0
   union() {
     linear_extrude(height=width)
       polygon(outline2d_ext(ext=depth- height, fn=fn));
