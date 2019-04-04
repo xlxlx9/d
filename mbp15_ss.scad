@@ -1,5 +1,5 @@
 use <comp/anchor.scad>;
-use <comp/corner.scad>;
+use <laptop.scad>;
 include <consts.scad>;
 
 $fn = 128;
@@ -32,5 +32,5 @@ union() {
   extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
   rotate([180 + extra_deg, -90, 0])
     translate([19, -7, 20])
-      corner(depth=CASE_DEPTH, width=CASE_WIDTH);
+      case_ss(depth=CASE_DEPTH, width=CASE_WIDTH);
 }

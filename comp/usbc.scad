@@ -4,6 +4,7 @@ module usbc_x(
   , xyr = 3
   , height=7
   , extend_top=0
+  , use_tunnel=true
   , tunnel_angle=90
   , tunnel_extend_top=5
   , tunnel_extend_bottom=3
@@ -11,6 +12,7 @@ module usbc_x(
   ) {
   xyr = min(xyr, depth / 2);
   xyr = min(xyr, width / 2);
+  rotate([0, 0, 90])
   union() {
     linear_extrude(height=height + extend_top) {
       union() {
@@ -23,12 +25,14 @@ module usbc_x(
             circle(xyr);
       }
     }
-    ht = tunnel_extend_bottom + tunnel_extend_top + height;
-    translate([0, 0, ht / 2 - tunnel_extend_bottom])
-    cube([
-        depth + 2 * tunnel_xy_padding, 
-        width + 2 * tunnel_xy_padding, 
-        ht], center=true);
+    if(use_tunnel) {
+      ht = tunnel_extend_bottom + tunnel_extend_top + height;
+      translate([0, 0, ht / 2 - tunnel_extend_bottom])
+      cube([
+          depth + 2 * tunnel_xy_padding, 
+          width + 2 * tunnel_xy_padding, 
+          ht], center=true);
+    }
   }
 }
 
