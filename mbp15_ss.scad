@@ -18,7 +18,7 @@ union() {
   );
 
   r0 = 4;
-  translate([-CASE_WIDTH / 40, CASE_DEPTH / 8 - 4, CASE_HEIGHT + r0])
+  translate([CASE_WIDTH * 0.05, CASE_DEPTH / 8 - 4, CASE_HEIGHT + r0])
   rotate([0, 90, 0])
     difference() {
       minkowski() { 
@@ -30,7 +30,12 @@ union() {
     }
   }
   extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
-  rotate([180 + extra_deg, -90, 0])
-    translate([19, -7, 20])
-      case_ss(depth=CASE_DEPTH, width=CASE_WIDTH);
+#  rotate([180 + extra_deg, -90, 0])
+    translate([19, 35, 32])
+      case_ss(
+          depth=CASE_DEPTH
+        , width=CASE_WIDTH
+        , tunnel_1=[[0, 0, 0], [0, 0, -20], [0, 10, -40], [95, 90, -30]]
+        , tunnel_2=[[0, 0, 0], [0, 0, -25], [0, 35, -40], [-85, 90, -30]]
+        , fn=$fn);
 }

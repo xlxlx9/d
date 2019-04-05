@@ -1,5 +1,6 @@
 use <comp/corner.scad>
 use <comp/usbc.scad>
+use <comp/tunnel.scad>
 
 module case_ss(
     width=300
@@ -25,6 +26,9 @@ module case_ss(
   , usbc_2_dy=-48.175
   , usbc_2_dx=-0.2
   , usbc_extend_top=2
+  , usbc_tunnel_xy_padding=0.2
+  , tunnel_1=[[0, 0, 0], [0, 0, -20], [0, 30, -30], [30, 90, 0]]
+  , tunnel_2=[[0, 0, 0], [0, 0, -30], [-10, 30, -40], [-30, 90, 0]]
   , fn = $fn
 ) {
   union() {
@@ -52,7 +56,7 @@ module case_ss(
           , depth=usbc_depth
           , xyr=usbc_xyr
           , extend_top=usbc_extend_top
-          , use_tunnel=false
+          , tunnel_xy_padding=usbc_tunnel_xy_padding
         );
       translate([usbc_2_dx, usbc_2_dy, 0])
         usbc_x(
@@ -60,9 +64,17 @@ module case_ss(
           , depth=usbc_depth
           , xyr=usbc_xyr
           , extend_top=usbc_extend_top
-          , use_tunnel=false
+          , tunnel_xy_padding=usbc_tunnel_xy_padding
         );
     }
+    tunnel_bezier(
+        control_points=[for(p = tunnel_1) p + [usbc_1_dx, usbc_1_dy, -usbc_height]]
+      , fn=fn
+    );
+    tunnel_bezier(
+        control_points=[for(p = tunnel_2) p + [usbc_2_dx, usbc_2_dy, -usbc_height]]
+      , fn=fn
+    );
   }
 }
 
