@@ -19,7 +19,7 @@ union() {
 
   r0 = 4;
   translate([CASE_WIDTH * 0.05, CASE_DEPTH / 8 - 4, CASE_HEIGHT + r0])
-  rotate([0, 90, 0])
+  *rotate([0, 90, 0])
     difference() {
       minkowski() { 
         cube([2 * CASE_HEIGHT, CASE_DEPTH / 4, CASE_WIDTH / 4], center=true);
@@ -35,7 +35,7 @@ union() {
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
-        , tunnel_1=[[0, 0, 0], [0, 0, -20], [0, 10, -40], [95, 90, -30]]
-        , tunnel_2=[[0, 0, 0], [0, 0, -25], [0, 35, -40], [-85, 90, -30]]
+        , tunnel_1=[[0, 0, 0], [0, 0, -20], [0, 7, -40], [70, 60, -30]]
+        , tunnel_2=[[0, 0, 0], [0, 0, -25], [0, 32, -30], [-65, 60, -30]]
         , fn=$fn);
 }
