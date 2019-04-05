@@ -62,16 +62,17 @@ module corner(
   , br = 0.66
   , ptt2 = 2
   , pth3 = 22
-  , psink = 0.6
-  , pdy = -6
+  , psink = 0.75
+  , pdy = -5.3
+  , pdz = 17
   , fn = $fn
 ) {
   translate([0, -height, 0])  // move edge of corner to y=0
   union() {
     linear_extrude(height=width)
       polygon(outline2d_ext(ext=depth- height, fn=fn));
-    translate([-thickness / 2 + psink, pdy, 0])
-      pad_track(height=width, ptt2=ptt2, pth3=pth3, fn=fn);
+    translate([-thickness / 2 + psink, pdy, pdz])
+      pad_track(height=width - pdz, ptt2=ptt2, pth3=pth3, fn=fn);
   }
 }
 

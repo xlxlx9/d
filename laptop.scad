@@ -20,10 +20,10 @@ module case_ss(
   , usbc_depth=6
   , usbc_height=7
   , usbc_xyr=3
-  , usbc_1_dy=-26.5
-  , usbc_1_dx=-1.6
-  , usbc_2_dy=-39
-  , usbc_2_dx=-1.6
+  , usbc_1_dy=-33.175
+  , usbc_1_dx=-0.2
+  , usbc_2_dy=-48.175
+  , usbc_2_dx=-0.2
   , usbc_extend_top=2
   , fn = $fn
 ) {
