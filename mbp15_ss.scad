@@ -36,4 +36,7 @@ difference() {
         , tunnel_1=[[0, 0, 0], [0, 0, -19], [0, 7, -42], [20, 60, -30]]
         , tunnel_2=[[0, 0, 0], [0, 0, -20], [0, 32, -35], [-25, 60, -30]]
         , fn=$fn);
+// test cable alignment
+*    rotate([0, 0, extra_deg])
+      cube([40, 60, 2 * BASE_WIDTH], center=true);
 }
