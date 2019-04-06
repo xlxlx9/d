@@ -23,7 +23,8 @@ difference() {
     rotate([0, 0, 0]) cloud_xy(
         thickness=BASE_WIDTH
       , r1=18
-      , r2=27
+      , r2=21
+      , r3=25
     );
   }
   extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
