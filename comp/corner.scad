@@ -70,7 +70,18 @@ module corner(
   translate([0, -height, 0])  // move edge of corner to y=0
   union() {
     linear_extrude(height=width)
-      polygon(outline2d_ext(ext=depth- height, fn=fn));
+      polygon(outline2d_ext(
+            ext=depth - height, 
+          , thickness=thickness
+          , height=height
+          , edge_front=edge_front
+          , edge_back=edge_back
+          , al=al
+          , bl=bl
+          , ar=ar
+          , br=br
+          , fn=fn 
+      ));
     translate([-thickness / 2 + psink, pdy, pdz])
       pad_track(height=width - pdz, ptt2=ptt2, pth3=pth3, fn=fn);
   }
