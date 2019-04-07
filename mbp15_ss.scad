@@ -30,13 +30,14 @@ difference() {
   }
   extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
   rotate([180 + extra_deg, -90, 0])
-    translate([14, 35, 32])
+    translate([14, 38, 38])
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
         , thickness=CASE_HEIGHT
         , usbc_width=10.3 /*r1*/ + 0.2
         , usbc_depth=6 /*r1*/ + 0.2
+        , usbc_height=16.3
         , usbc_1_dy=-33.175 /*r1*/ - 0.25
         , usbc_1_dx=-0.2 /*r1*/ + 0.45
         , usbc_2_dy=-48.175 /*r1*/ - 0.25

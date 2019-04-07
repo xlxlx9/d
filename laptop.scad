@@ -54,6 +54,7 @@ module case_ss(
         usbc_x(
             width=usbc_width
           , depth=usbc_depth
+          , height=usbc_height
           , xyr=usbc_xyr
           , extend_top=usbc_extend_top
           , tunnel_xy_padding=usbc_tunnel_xy_padding
@@ -62,6 +63,7 @@ module case_ss(
         usbc_x(
             width=usbc_width
           , depth=usbc_depth
+          , height=usbc_height
           , xyr=usbc_xyr
           , extend_top=usbc_extend_top
           , tunnel_xy_padding=usbc_tunnel_xy_padding
