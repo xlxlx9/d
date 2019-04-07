@@ -1,7 +1,10 @@
 use <comp/anchor.scad>;
 use <comp/cloud.scad>;
 use <laptop.scad>;
+
 include <consts.scad>;
+include <variants/um3.scad>
+//include <variants/cr10.scad>
 
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);

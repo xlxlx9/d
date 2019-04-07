@@ -22,8 +22,8 @@ BASE_BUMP_DEPTH = 11;
 BASE_BUMP_HEIGHT = 2.2;
 
 // ports
-USBC_1_DY=-33.175 /*r1*/ - 0.25 /*r2*/ - 0.15;
-USBC_1_DX=-0.2 /*r1*/ + 0.45;
-USBC_2_DY=-48.175 /*r1*/ - 0.25 /*r2*/ - 0.15;
-USBC_2_DX=-0.2 /*r1*/ + 0.45;
+USBC_1_DY=-33.175;
+USBC_1_DX=-0.2;
+USBC_2_DY=-48.175;
+USBC_2_DX=-0.2;
 USBC_TUNNEL_XY_PADDING=0.4;
