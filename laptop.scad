@@ -19,7 +19,8 @@ module case_ss(
   , pdy = -6
   , usbc_width=10.3
   , usbc_depth=6
-  , usbc_height=7
+  , usbc_height_1=7
+  , usbc_height_2=17
   , usbc_xyr=3
   , usbc_1_dy=-33.175
   , usbc_1_dx=-0.2
@@ -49,34 +50,34 @@ module case_ss(
       , pdy=pdy
       , fn=fn
     );
-    translate([0, 0, -usbc_height]) {
-      translate([usbc_1_dx, usbc_1_dy, 0])
-        usbc_x(
-            width=usbc_width
-          , depth=usbc_depth
-          , height=usbc_height
-          , xyr=usbc_xyr
-          , extend_top=usbc_extend_top
-          , tunnel_xy_padding=usbc_tunnel_xy_padding
-        );
-      translate([usbc_2_dx, usbc_2_dy, 0])
-        usbc_x(
-            width=usbc_width
-          , depth=usbc_depth
-          , height=usbc_height
-          , xyr=usbc_xyr
-          , extend_top=usbc_extend_top
-          , tunnel_xy_padding=usbc_tunnel_xy_padding
-        );
+    translate([usbc_1_dx, usbc_1_dy, -usbc_height_1]) {
+      usbc_x(
+          width=usbc_width
+        , depth=usbc_depth
+        , height=usbc_height_1
+        , xyr=usbc_xyr
+        , extend_top=usbc_extend_top
+        , tunnel_xy_padding=usbc_tunnel_xy_padding
+      );
+      tunnel_bezier(
+          control_points=tunnel_1
+        , fn=fn
+      );
     }
-    tunnel_bezier(
-        control_points=[for(p = tunnel_1) p + [usbc_1_dx, usbc_1_dy, -usbc_height]]
-      , fn=fn
-    );
-    tunnel_bezier(
-        control_points=[for(p = tunnel_2) p + [usbc_2_dx, usbc_2_dy, -usbc_height]]
-      , fn=fn
-    );
+    translate([usbc_2_dx, usbc_2_dy, -usbc_height_2]) {
+      usbc_x(
+          width=usbc_width
+        , depth=usbc_depth
+        , height=usbc_height_2
+        , xyr=usbc_xyr
+        , extend_top=usbc_extend_top
+        , tunnel_xy_padding=usbc_tunnel_xy_padding
+      );
+      tunnel_bezier(
+          control_points=tunnel_2
+        , fn=fn
+      );
+    }
   }
 }
 
