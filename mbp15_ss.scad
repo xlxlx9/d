@@ -19,7 +19,7 @@ difference() {
     );
 
     r0 = 4;
-    translate([20, 0, 0])
+    translate([20, -BASE_BUMP_HEIGHT, 0])
     rotate([0, 0, 0]) cloud_xy(
         thickness=BASE_WIDTH
       , r1=18
@@ -44,6 +44,9 @@ difference() {
         , tunnel_1=[[0, 0, 0], [0, 0, -19], [0, 7, -42], [20, 60, -30]]
         , tunnel_2=[[0, 0, 0], [0, 0, -20], [0, 32, -35], [-25, 60, -30]]
         , fn=$fn);
+  // make room for bump
+  translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
+    cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
 // test cable alignment
 *    rotate([0, 0, extra_deg])
       cube([40, 60, 2 * BASE_WIDTH], center=true);
