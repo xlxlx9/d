@@ -27,6 +27,7 @@ module case_ss(
   , usbc_2_dy=-48.175
   , usbc_2_dx=-0.2
   , usbc_extend_top=2
+  , usbc_tunnel_extend_bottom=2
   , usbc_tunnel_xy_padding=0.2
   , tunnel_1=[[0, 0, 0], [0, 0, -20], [0, 30, -30], [30, 90, 0]]
   , tunnel_2=[[0, 0, 0], [0, 0, -30], [-10, 30, -40], [-30, 90, 0]]
@@ -57,10 +58,13 @@ module case_ss(
         , height=usbc_height_1
         , xyr=usbc_xyr
         , extend_top=usbc_extend_top
+        , tunnel_extend_bottom=usbc_tunnel_extend_bottom
         , tunnel_xy_padding=usbc_tunnel_xy_padding
       );
       tunnel_bezier(
           control_points=tunnel_1
+        , width=usbc_width + usbc_tunnel_xy_padding * 2
+        , depth=usbc_depth + usbc_tunnel_xy_padding * 2
         , fn=fn
       );
     }
@@ -71,10 +75,13 @@ module case_ss(
         , height=usbc_height_2
         , xyr=usbc_xyr
         , extend_top=usbc_extend_top
+        , tunnel_extend_bottom=usbc_tunnel_extend_bottom
         , tunnel_xy_padding=usbc_tunnel_xy_padding
       );
       tunnel_bezier(
           control_points=tunnel_2
+        , width=usbc_width + usbc_tunnel_xy_padding * 2
+        , depth=usbc_depth + usbc_tunnel_xy_padding * 2
         , fn=fn
       );
     }

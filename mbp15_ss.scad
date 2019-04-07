@@ -4,6 +4,9 @@ use <laptop.scad>;
 include <consts.scad>;
 
 $fn = 128;
+extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
+
+intersection() {
 
 difference() {
   union() {
@@ -22,15 +25,14 @@ difference() {
     translate([20, -BASE_BUMP_HEIGHT, 0])
     rotate([0, 0, 0]) cloud_xy(
         thickness=BASE_WIDTH
-      , r1=18
+      , r1=17
       , r2=16
       , r3=25
       , r4=13.6
     );
   }
-  extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
   rotate([180 + extra_deg, -90, 0])
-    translate([14, 38, 38])
+    translate([14, 35, 37])
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
@@ -43,9 +45,11 @@ difference() {
         , usbc_1_dx=-0.2 /*r1*/ + 0.45
         , usbc_2_dy=-48.175 /*r1*/ - 0.25 /*r2*/ - 0.15
         , usbc_2_dx=-0.2 /*r1*/ + 0.45
-        , usbc_tunnel_xy_padding=0.3
-        , tunnel_1=[[0, 0, 0], [0, 0, -19], [0, 7, -42], [20, 60, -30]]
-        , tunnel_2=[[0, 0, 0], [0, 0, -20], [0, 32, -35], [-25, 60, -30]]
+        , usbc_tunnel_xy_padding=0.4
+        , usbc_tunnel_extend_bottom=2
+        , usbc_extend_top=0
+        , tunnel_1=[[0, 0, 0], [0, 0, -8], [0, 5, -18], [0, 30, -47]]
+        , tunnel_2=[[0, 0, 0], [0, 0, -7], [0, 5, -14], [0, 30, -24]]
         , fn=$fn);
   // make room for bump
   translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
@@ -53,4 +57,9 @@ difference() {
 // test cable alignment
 *    rotate([0, 0, extra_deg])
       cube([40, 60, 2 * BASE_WIDTH], center=true);
+}
+
+// test cable reach
+*rotate([0, 0, extra_deg])
+  cube([40, 60, 2 * BASE_WIDTH], center=true);
 }
