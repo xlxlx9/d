@@ -35,12 +35,12 @@ difference() {
           depth=CASE_DEPTH
         , width=CASE_WIDTH
         , thickness=CASE_HEIGHT
-        , usbc_width=10.3 /*r1*/ + 0.2
-        , usbc_depth=6 /*r1*/ + 0.2
+        , usbc_width=10.3 /*r1*/ + 0.2 /*r2*/ + 0.3
+        , usbc_depth=6 /*r1*/ + 0.2 /*r2*/ + 0.3
         , usbc_height=16.3
-        , usbc_1_dy=-33.175 /*r1*/ - 0.25
+        , usbc_1_dy=-33.175 /*r1*/ - 0.25 /*r2*/ - 0.15
         , usbc_1_dx=-0.2 /*r1*/ + 0.45
-        , usbc_2_dy=-48.175 /*r1*/ - 0.25
+        , usbc_2_dy=-48.175 /*r1*/ - 0.25 /*r2*/ - 0.15
         , usbc_2_dx=-0.2 /*r1*/ + 0.45
         , usbc_tunnel_xy_padding=0.3
         , tunnel_1=[[0, 0, 0], [0, 0, -19], [0, 7, -42], [20, 60, -30]]
