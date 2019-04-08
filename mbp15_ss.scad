@@ -47,10 +47,10 @@ difference() {
           depth=CASE_DEPTH
         , width=CASE_WIDTH
         , thickness=CASE_HEIGHT
-        , usbc_width=10.3 /*r1*/ + 0.2 /*r2*/ + 0.3
-        , usbc_depth=6 /*r1*/ + 0.2 /*r2*/ + 0.3
-        , usbc_height_1=16.3
-        , usbc_height_2=16.3
+        , usbc_width=USBC_WIDTH
+        , usbc_depth=USBC_DEPTH
+        , usbc_height_1=USBC_HEIGHT_1
+        , usbc_height_2=USBC_HEIGHT_2
         , usbc_1_dy=USBC_1_DY
         , usbc_1_dx=USBC_1_DX
         , usbc_2_dy=USBC_2_DY
