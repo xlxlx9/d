@@ -87,4 +87,68 @@ module corner(
   }
 }
 
+module corner_t(
+    width=300
+  , depth=500
+  , thickness=14.5
+  , height=30
+  , edge_front=4.9
+  , edge_back=3
+  , corner_radius=9
+  , al = 1.05
+  , bl = 0.75
+  , ar = 0.95
+  , br = 0.66
+  , ptt2 = 2
+  , pth3 = 22
+  , psink = 0.75
+  , pdy = -5.3
+  , pdz = 17
+  , fn = $fn
+) {
+  translate([0, -height, 0])  // move edge of corner to y=0
+  union() {
+    intersection() {
+    linear_extrude(height=width)
+      polygon(outline2d_ext(
+            ext=depth - height, 
+          , thickness=thickness
+          , height=height
+          , edge_front=edge_front
+          , edge_back=edge_back
+          , al=al
+          , bl=bl
+          , ar=ar
+          , br=br
+          , fn=fn 
+      ));
+    translate([0, -depth + height, height])
+    rotate([-90, 0, 0])
+    linear_extrude(height=depth)
+      polygon(outline2d_ext(
+            ext=width- height, 
+          , thickness=thickness
+          , height=height
+          , edge_front=edge_front
+          , edge_back=edge_back
+          , al=al
+          , bl=bl
+          , ar=ar
+          , br=br
+          , fn=fn 
+      ));
+    translate([thickness, -depth + height + corner_radius, corner_radius]) 
+      rotate([0, -90, 0])
+        linear_extrude(height=thickness * 2) {
+          offset(r=corner_radius) {
+            square([width - 2 * corner_radius, depth - 2 * corner_radius]);
+          }
+        }
+    }
+    translate([-thickness / 2 + psink, pdy, pdz])
+      pad_track(height=width - pdz, ptt2=ptt2, pth3=pth3, fn=fn);
+  }
+}
+
 corner(fn=80);
+translate([40, 0, 0]) corner_t(fn=80);
