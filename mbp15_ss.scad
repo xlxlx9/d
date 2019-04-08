@@ -41,7 +41,7 @@ difference() {
     }
   }
   // laptop corner, cable support, and tunnel
-  rotate([180 + extra_deg, -90, 0])
+#  rotate([180 + extra_deg, -90, 0])
     translate([14, 35, 37])
       case_ss(
           depth=CASE_DEPTH
@@ -62,12 +62,12 @@ difference() {
         , usbc_tunnel_extend_bottom=2
         , usbc_extend_top=2
         , tunnel_1=[[0, 0, 0], [0, 0, -8], [0, 5, -18], [0, 30, -47]]
-        , tunnel_2=[[0, 0, 0], [0, 0, -7], [0, 5, -14], [0, 30, -24]]
+        , tunnel_2=[[0, 0, 0], [0, 0, -12], [0, 5, -18], [0, 30, -28]]
         , fn=$fn);
   // widen tunnel
-  translate([1, 12, BASE_WIDTH / 2])
-    rotate([0, 0, extra_deg])
-  cube([15, 22, USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING], center=true);
+#    rotate([0, 0, extra_deg])
+  translate([1, 13.5, BASE_WIDTH / 2])
+      cube([40, USBC_DEPTH + 2 * USBC_TUNNEL_XY_PADDING, USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING], center=true);
   // make room for bump
   translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
     cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
