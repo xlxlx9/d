@@ -25,7 +25,7 @@ difference() {
       , r = BASE_EDIGE_RADIUS
     );
 
-    translate([20, -BASE_BUMP_HEIGHT, 0])
+    translate([15, -BASE_BUMP_HEIGHT, 0])
     rotate([0, 0, 0]) cloud_xy(
         thickness=BASE_WIDTH
       , r1=17
