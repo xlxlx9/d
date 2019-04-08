@@ -64,6 +64,10 @@ difference() {
         , tunnel_1=[[0, 0, 0], [0, 0, -8], [0, 5, -18], [0, 30, -47]]
         , tunnel_2=[[0, 0, 0], [0, 0, -7], [0, 5, -14], [0, 30, -24]]
         , fn=$fn);
+  // widen tunnel
+  translate([1, 12, BASE_WIDTH / 2])
+    rotate([0, 0, extra_deg])
+  cube([15, 22, USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING], center=true);
   // make room for bump
   translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
     cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
@@ -74,5 +78,5 @@ difference() {
 
 // test cable reach
 *rotate([0, 0, extra_deg])
-  cube([40, 60, 2 * BASE_WIDTH], center=true);
+  cube([74, 60, 2 * BASE_WIDTH], center=true);
 }
