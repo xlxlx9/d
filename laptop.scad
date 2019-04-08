@@ -9,6 +9,7 @@ module case_ss(
   , height=30
   , edge_front=4.9
   , edge_back=3
+  , corner_radius=9
   , al = 1.05
   , bl = 0.75
   , ar = 0.95
@@ -35,12 +36,14 @@ module case_ss(
 ) {
   union() {
     corner(
+    //corner_t(
         width=width
       , depth=depth
       , thickness=thickness
       , height=height
       , edge_front=edge_front
       , edge_back=edge_back
+      , corner_radius=corner_radius
       , al=al
       , bl=bl
       , ar=ar

@@ -47,6 +47,9 @@ difference() {
           depth=CASE_DEPTH
         , width=CASE_WIDTH
         , thickness=CASE_HEIGHT
+        , edge_front=CASE_EDGE_FRONT
+        , edge_back=CASE_EDGE_BACK
+        , corner_radius=CASE_CORNER_R
         , usbc_width=USBC_WIDTH
         , usbc_depth=USBC_DEPTH
         , usbc_height_1=USBC_HEIGHT_1
