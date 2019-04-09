@@ -3,8 +3,8 @@ use <comp/cloud.scad>;
 use <laptop.scad>;
 
 include <consts.scad>;
-include <variants/um3.scad>
-//include <variants/cr10.scad>
+//include <variants/um3.scad>
+include <variants/cr10.scad>
 
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
@@ -87,4 +87,5 @@ difference() {
 // test cable reach
 *rotate([0, 0, extra_deg])
   cube([74, 60, 2 * BASE_WIDTH], center=true);
+*cube([56, 56, 2 * BASE_WIDTH], center=true);
 }
