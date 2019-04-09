@@ -41,8 +41,9 @@ difference() {
     }
   }
   // laptop corner, cable support, and tunnel
-#  rotate([180 + extra_deg, -90, 0])
+  rotate([180 + extra_deg, -90, 0])
     translate([14, 35, 37])
+    //translate([30, 0, 0])
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
@@ -61,13 +62,20 @@ difference() {
         , usbc_tunnel_xy_padding=USBC_TUNNEL_XY_PADDING
         , usbc_tunnel_extend_bottom=2
         , usbc_extend_top=2
-        , tunnel_1=[[0, 0, 0], [0, 0, -8], [0, 5, -18], [0, 30, -47]]
-        , tunnel_2=[[0, 0, 0], [0, 0, -12], [0, 5, -18], [0, 30, -28]]
+        , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, 4, -20], [0, 20, -47]]
+        , tunnel_2=[[0, 0, 0], [0, 0, -12], [0, 5, -20], [0, 30, -28]]
         , fn=$fn);
   // widen tunnel
-#    rotate([0, 0, extra_deg])
-  translate([1, 13.5, BASE_WIDTH / 2])
-      cube([40, USBC_DEPTH + 2 * USBC_TUNNEL_XY_PADDING, USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING], center=true);
+  //translate([0, 0, 30])
+  union() {
+    rotate([0, 0, extra_deg])
+      translate([1, 13.5, BASE_WIDTH / 2])
+        cube([50, USBC_DEPTH + 2 * USBC_TUNNEL_XY_PADDING, USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING], center=true);
+    translate([0, 0, BASE_WIDTH / 2 - USBC_WIDTH / 2 - USBC_TUNNEL_XY_PADDING])
+      linear_extrude(height=USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING) {
+        polygon([[-27, -16], [5, -20], [-4, 24]]);
+    }
+  }
   // make room for bump
   translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
     cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
