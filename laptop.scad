@@ -33,11 +33,12 @@ module case_ss(
   , usbc_tunnel_xy_padding=0.2
   , tunnel_1=[[0, 0, 0], [0, 0, -20], [0, 30, -30], [30, 90, 0]]
   , tunnel_2=[[0, 0, 0], [0, 0, -30], [-10, 30, -40], [-30, 90, 0]]
+  , delicate=false
   , fn = $fn
 ) {
   union() {
-    corner(
-    //corner_t(
+    //corner(
+    corner_t(
         width=width
       , depth=depth
       , thickness=thickness
@@ -53,6 +54,7 @@ module case_ss(
       , pth3=pth3
       , psink=psink
       , pdy=pdy
+      , delicate=delicate
       , fn=fn
     );
     translate([usbc_1_dx, usbc_1_dy, -usbc_height_1]) {
