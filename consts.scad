@@ -1,4 +1,4 @@
-// Default to Macbook Pro 15" 2016-2018
+// Default to Macbook Pro 13" 2016-2018
 CASE_WIDTH = 304.1;
 CASE_HEIGHT= 14.9;
 CASE_DEPTH = 212.4;
