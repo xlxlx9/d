@@ -76,11 +76,9 @@ difference() {
     }
   // widen tunnel
   //translate([0, 0, 30])
-  union() {
-    translate([0, 0, BASE_WIDTH / 2 - USBC_WIDTH / 2 - USBC_TUNNEL_XY_PADDING])
-      linear_extrude(height=USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING) {
-        polygon([[-27, -16], [5, -20], [-4, 20]]);
-    }
+  translate([0, 0, BASE_WIDTH / 2 - USBC_WIDTH / 2 - USBC_TUNNEL_XY_PADDING])
+    linear_extrude(height=USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING) {
+      polygon([[-27, -16], [5, -20], [-4, 20]]);
   }
   // make room for bump
   translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
