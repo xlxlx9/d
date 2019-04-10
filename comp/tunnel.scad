@@ -12,17 +12,21 @@ module tunnel_bezier(
   if(4 > len(control_points)) {
     echo("Please pass at least 4 distinct points");
   } else {
-    path=bezier4(
-        control_points[0]
-      , control_points[1]
-      , control_points[2]
-      , control_points[3]
-      , fn=fn
-    );
-    //echo(path);
     shape=[[-width / 2, -depth / 2], [-width / 2, depth / 2],
            [width / 2, depth / 2], [width / 2, -depth / 2]];
-    path_extrude(exShape=shape, exPath=path, merge=false);
+    for (i=[0:4:len(control_points) - len(control_points) % 4 - 1]) {
+      path_extrude(
+          exPath=bezier4(
+            control_points[i]
+          , control_points[i + 1]
+          , control_points[i + 2]
+          , control_points[i + 3]
+          , fn=fn
+          )
+        , exShape=shape
+        , merge=false
+      );
+    }
   }
 }
 
