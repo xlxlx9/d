@@ -42,8 +42,8 @@ difference() {
   }
   // laptop corner, cable support, and tunnel
   rotate([180 + extra_deg, -90, 0])
-    translate([14, 35, 37])
     //translate([30, 0, 0])
+    translate([14, 35, 37]) {
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
@@ -66,6 +66,7 @@ difference() {
         , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, 4, -20], [0, 20, -47]]
         , tunnel_2=[[0, 0, 0], [0, 0, -12], [0, 5, -20], [0, 30, -28]]
         , fn=$fn);
+    }
   // widen tunnel
   //translate([0, 0, 30])
   union() {
