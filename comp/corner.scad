@@ -95,6 +95,7 @@ module corner_t(
   , edge_front=4.9
   , edge_back=3
   , corner_radius=9
+  , delicate=false
   , al = 1.05
   , bl = 0.75
   , ar = 0.95
@@ -109,41 +110,80 @@ module corner_t(
   translate([0, -height, 0])  // move edge of corner to y=0
   union() {
     intersection() {
-    linear_extrude(height=width)
-      polygon(outline2d_ext(
-            ext=depth - height, 
-          , thickness=thickness
-          , height=height
-          , edge_front=edge_front
-          , edge_back=edge_back
-          , al=al
-          , bl=bl
-          , ar=ar
-          , br=br
-          , fn=fn 
-      ));
-    translate([0, -depth + height, height])
-    rotate([-90, 0, 0])
-    linear_extrude(height=depth)
-      polygon(outline2d_ext(
-            ext=width- height, 
-          , thickness=thickness
-          , height=height
-          , edge_front=edge_front
-          , edge_back=edge_back
-          , al=al
-          , bl=bl
-          , ar=ar
-          , br=br
-          , fn=fn 
-      ));
-    translate([thickness, -depth + height + corner_radius, corner_radius]) 
-      rotate([0, -90, 0])
-        linear_extrude(height=thickness * 2) {
-          offset(r=corner_radius) {
-            square([width - 2 * corner_radius, depth - 2 * corner_radius]);
+      union() {
+        difference() {
+          intersection() {
+            linear_extrude(height=width)
+              polygon(outline2d_ext(
+                    ext=depth - height, 
+                  , thickness=thickness
+                  , height=height
+                  , edge_front=edge_front
+                  , edge_back=edge_back
+                  , al=al
+                  , bl=bl
+                  , ar=ar
+                  , br=br
+                  , fn=fn 
+              ));
+            translate([0, -depth + height, height])
+            rotate([-90, 0, 0])
+            linear_extrude(height=depth)
+              polygon(outline2d_ext(
+                    ext=width- height, 
+                  , thickness=thickness
+                  , height=height
+                  , edge_front=edge_front
+                  , edge_back=edge_back
+                  , al=al
+                  , bl=bl
+                  , ar=ar
+                  , br=br
+                  , fn=fn 
+              ));
+          }
+          if(delicate) {
+            ovl = -1;
+            translate([0, height, 0])
+            rotate([0, 90, 0])
+            cube([corner_radius * 2 + ovl, corner_radius * 2 + ovl, thickness * 2], center=true);
           }
         }
+        if(delicate) {
+          edge_crh = [for (p=outline2d(
+              thickness=thickness
+            , height=height
+            , edge_front=edge_front
+            , edge_back=edge_back
+            , al=al
+            , bl=bl
+            , ar=ar
+            , br=br
+            , fn=fn 
+          )) if(p[1] > height - corner_radius) 
+            [p[1] - (height - corner_radius), p[0]]
+          ];
+          all_points = concat(
+                [[0, edge_crh[0][1]]]
+              , edge_crh
+              , [[0, edge_crh[len(edge_crh) - 1][1]]]
+          );
+          //echo(all_points);
+          translate([0, -corner_radius, corner_radius])
+          translate([0, height, 0])
+            rotate([0, 90, 0])
+              rotate_extrude() {
+                  polygon(all_points);
+              }
+        }
+      }
+      translate([thickness, -depth + height + corner_radius, corner_radius]) 
+        rotate([0, -90, 0])
+          linear_extrude(height=thickness * 2) {
+            offset(r=corner_radius) {
+              square([width - 2 * corner_radius, depth - 2 * corner_radius]);
+            }
+          }
     }
     translate([-thickness / 2 + psink, pdy, pdz])
       pad_track(height=width - pdz, ptt2=ptt2, pth3=pth3, fn=fn);
@@ -152,3 +192,4 @@ module corner_t(
 
 corner(fn=80);
 translate([40, 0, 0]) corner_t(fn=80);
+translate([80, 0, 0]) corner_t(fn=80, delicate=true);
