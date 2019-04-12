@@ -31,9 +31,9 @@ difference() {
         rotate([0, 0, 0]) cloud_xy(
             thickness=BASE_WIDTH
           , r1=17
-          , r2=16
+          , r2=18
           , r3=25
-          , r4=13.6
+          , r4=18
         );
       // do not intrude plate insert
       translate([-30, -BASE_PLATE_SINK - BASE_ROTATE_RADIUS, -BASE_WIDTH * 3]) 
