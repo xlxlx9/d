@@ -22,7 +22,7 @@ difference() {
       , back_extension_under = BASE_BACK_UNDER
       , back_plate_height = BASE_PLATE_HEIGHT
       , back_plate_sink = BASE_PLATE_SINK
-      , r = BASE_EDIGE_RADIUS
+      , r = BASE_EDGE_RADIUS
     );
 
     // Use cloud shape as closure
