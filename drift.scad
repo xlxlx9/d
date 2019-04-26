@@ -37,9 +37,9 @@ intersection() {
   cube([100, 100, 40], center=true);
 
 //rotate([-90, 0, 0])
+color("LightYellow", 1)
 difference() { // diff::br
 rotate([0, 0, 45]) difference() {
-color("LightYellow", 1)
 union() {
 *  translate([0, 0, -PLATE_HEIGHT])
   linear_extrude(height=PLATE_HEIGHT) {
@@ -103,3 +103,25 @@ for(t = [-1,1]) {
 } // for t cylinder
 } // diff::br
 } // intersection
+
+// plate
+translate([0, 0, -40])
+//translate([0, 0, PLATE_SINK])
+color("Burlywood", 1)
+difference() {
+  rotate([0, 0, 45])
+    translate([0, 0, -PLATE_HEIGHT])
+    linear_extrude(height=PLATE_HEIGHT) {
+      offset(r=PLATE_RADIUS)
+        square(PLATE_WDITH - 2 * PLATE_RADIUS, center=true);
+    }
+  cube([SH1_WDITH + 2 * SH1_OFF_R, SH1_HEIGHT, PLATE_SINK * 2], center=true);
+  translate([0, 0, 0]) 
+    cube([LBR_WIDTH, LBR_HEIGHT_V * 2 + SH1_HEIGHT, 2 * LBR_DEPTH], center=true);
+  for(i = [-1, 1]) {
+    for(j = [-1, 1]) {
+      translate([LBR_HOLE_CX * i, (LBR_HOLE_CZ + SH1_HEIGHT / 2) * j, 0])
+        cylinder(h=3 * PLATE_HEIGHT, r=LBR_SCREW_R, center=true);
+    }
+  }
+}
