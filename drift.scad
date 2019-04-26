@@ -9,6 +9,7 @@ extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
 PLATE_WDITH = 90;
 PLATE_RADIUS = 16;
 PLATE_HEIGHT = 20;
+PLATE_SINK = 5;
 
 SH1_WDITH = 68;
 SH1_DEPTH = 50;
@@ -16,6 +17,15 @@ SH1_HEIGHT = 30;
 SH1_OFF_R = 4;
 
 USBC_2_WIDTH = 12.20 + 0.15;
+
+// L brackets
+LBR_WIDTH = 33;
+LBR_DEPTH = 1.14;
+LBR_HEIGHT_V = 26.3;
+LBR_HOLE_R = 4.95;
+LBR_HOLE_CZ = 17.6 + LBR_HOLE_R / 2;
+LBR_HOLE_CX = 15.2 / 2 + LBR_HOLE_R / 2;
+LBR_SCREW_R = 2.15;
 
 intersection() {
 * translate([40, 70, 0])
@@ -26,7 +36,8 @@ intersection() {
   rotate([0, 0, 90 - extra_deg])
   cube([100, 100, 40], center=true);
 
-rotate([-90, 0, 0])
+//rotate([-90, 0, 0])
+difference() { // diff::br
 rotate([0, 0, 45]) difference() {
 color("LightYellow", 1)
 union() {
@@ -79,4 +90,16 @@ translate([-17, 17, 27])
  rotate([0, 0, -45]) translate([40, -0.25, 0])
     cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
+// sink for L brackets
+  translate([0, SH1_HEIGHT / 2, 0]) 
+    cube([LBR_WIDTH, 2 * LBR_DEPTH, LBR_HEIGHT_V * 2], center=true);
+  translate([0, -SH1_HEIGHT / 2, 0]) 
+    cube([LBR_WIDTH, 2 * LBR_DEPTH, LBR_HEIGHT_V * 2], center=true);
+// screws
+for(t = [-1,1]) {
+  translate([LBR_HOLE_CX * t, 0, LBR_HOLE_CZ - SH1_OFF_R + PLATE_SINK])
+    rotate([90, 0, 0])
+    cylinder(h=3 * SH1_HEIGHT, r=LBR_SCREW_R, center=true);
+} // for t cylinder
+} // diff::br
 } // intersection
