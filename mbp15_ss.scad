@@ -3,8 +3,11 @@ use <comp/cloud.scad>;
 use <laptop.scad>;
 
 include <consts.scad>;
+include <variants/model_15in.scad>;
 //include <variants/um3.scad>
 include <variants/cr10.scad>
+//include <variants/cr10_fc.scad>
+//include <variants/power_cable_only.scad>
 
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
@@ -43,7 +46,7 @@ difference() {
   // laptop corner, cable support, and tunnel
   rotate([180 + extra_deg, -90, 0])
     //translate([30, 0, 0])
-    translate([14, 35, 37]) {
+    translate([15, 35, 37]) {
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
@@ -85,7 +88,10 @@ difference() {
     cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
   // test cable alignment
 *    rotate([0, 0, extra_deg])
-      cube([40, 60, 2 * BASE_WIDTH], center=true);
+      cube([40, 70, 2 * BASE_WIDTH], center=true);
+*    rotate([0, 0, extra_deg])
+      translate([65, 0, BASE_WIDTH / 2])
+      cube([30, 150, 2 * BASE_WIDTH], center=true);
 }
 
 // test cable reach
