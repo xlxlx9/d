@@ -4,8 +4,9 @@ use <lib/star.scad>;
 use <laptop.scad>;
 
 include <consts.scad>;
+include <variants/model_15in.scad>;
 //include <variants/um3.scad>
-include <variants/cr10.scad>
+include <variants/cr10_fc.scad>
 //include <variants/power_cable_only.scad>
 
 $fn = 128;
@@ -15,7 +16,7 @@ intersection() {
 
 difference() {
   union() {
-*    anchor(
+    anchor(
         width=BASE_WIDTH
       , height_above_surface = BASE_HEIGHT_ABOVE_SURFACE
       , rotate_radius = BASE_ROTATE_RADIUS
@@ -54,9 +55,9 @@ difference() {
           Star(points=5, outer=1.2, inner=0.7);
     }
   // laptop corner, cable support, and tunnel
-  rotate([180 + extra_deg, -90, 0])
-    //translate([30, 0, 0])
-    translate([14, 27, 30]) {
+ rotate([180 + extra_deg, -90, 0])
+//    translate([30, 0, 0])
+    translate([15, 27, 30]) {
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
@@ -76,8 +77,9 @@ difference() {
         , usbc_1_tunnel_extend_bottom=44
         , usbc_2_tunnel_extend_bottom=36
         , usbc_extend_top=2
-        , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, 4, -20], [0, 20, -47]]
+        , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, 18, -30], [0, 40, -37]]
         , tunnel_2=[[0, 0, 0], [0, 0, -12], [0, 5, -20], [0, 30, -28]]
+        , psink=PAD_SINK
 //        , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
     }
@@ -85,14 +87,17 @@ difference() {
   //translate([0, 0, 30])
   translate([0, 0, BASE_WIDTH / 2 - USBC_WIDTH / 2 - USBC_TUNNEL_XY_PADDING])
     linear_extrude(height=USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING) {
-      polygon([[-27, -16], [5, -20], [-4, 20]]);
+      polygon([[-36, -12], [6, -20], [-11, 19]]);
   }
   // make room for bump
-*  translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
+  translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
     cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
   // test cable alignment
-*    rotate([0, 0, extra_deg])
-      cube([40, 60, 2 * BASE_WIDTH], center=true);
+    *rotate([0, 0, extra_deg])
+      cube([40, 80, 2 * BASE_WIDTH], center=true);
+    *rotate([0, 0, extra_deg])
+      translate([65, 0, 0])
+      cube([40, 80, 2 * BASE_WIDTH], center=true);
 }
 
 // test cable reach
