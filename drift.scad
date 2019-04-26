@@ -1,6 +1,7 @@
 use <laptop.scad>;
 
 include <consts.scad>;
+include <variants/model_15in.scad>;
 
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
@@ -16,6 +17,16 @@ SH1_OFF_R = 4;
 
 USBC_2_WIDTH = 12.20 + 0.15;
 
+intersection() {
+* translate([40, 70, 0])
+  cube([100, 100, 40], center=true);
+* translate([20, 20, 0])
+  cube([100, 100, 40], center=true);
+* translate([10, 20, 0])
+  rotate([0, 0, 90 - extra_deg])
+  cube([100, 100, 40], center=true);
+
+rotate([-90, 0, 0])
 rotate([0, 0, 45]) difference() {
 color("LightYellow", 1)
 union() {
@@ -68,3 +79,4 @@ translate([-17, 17, 27])
  rotate([0, 0, -45]) translate([40, -0.25, 0])
     cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
+} // intersection
