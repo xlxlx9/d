@@ -42,8 +42,8 @@ translate([-13, 13, 25])
         , corner_radius=CASE_CORNER_R
         , usbc_width=USBC_WIDTH
         , usbc_depth=USBC_DEPTH
-        , usbc_height_1=USBC_HEIGHT_1
-        , usbc_height_2=USBC_HEIGHT_2
+        , usbc_height_1=USBC_1_HEIGHT
+        , usbc_height_2=USBC_2_HEIGHT
         , usbc_1_dy=USBC_1_DY
         , usbc_1_dx=USBC_1_DX
         , usbc_2_dy=USBC_2_DY

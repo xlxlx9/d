@@ -20,8 +20,8 @@ module case_ss(
   , pdy = -6
   , usbc_width=10.3
   , usbc_depth=6
-  , usbc_height_1=7
-  , usbc_height_2=17
+  , usbc_1_height=7
+  , usbc_2_height=17
   , usbc_xyr=3
   , usbc_1_dy=-33.175
   , usbc_1_dx=-0.2
@@ -57,11 +57,11 @@ module case_ss(
       , delicate=delicate
       , fn=fn
     );
-    translate([usbc_1_dx, usbc_1_dy, -usbc_height_1]) {
+    translate([usbc_1_dx, usbc_1_dy, -usbc_1_height]) {
       usbc_x(
           width=usbc_width
         , depth=usbc_depth
-        , height=usbc_height_1
+        , height=usbc_1_height
         , xyr=usbc_xyr
         , extend_top=usbc_extend_top
         , tunnel_extend_bottom=usbc_1_tunnel_extend_bottom
@@ -74,11 +74,11 @@ module case_ss(
         , fn=fn
       );
     }
-    translate([usbc_2_dx, usbc_2_dy, -usbc_height_2]) {
+    translate([usbc_2_dx, usbc_2_dy, -usbc_2_height]) {
       usbc_x(
           width=usbc_width
         , depth=usbc_depth
-        , height=usbc_height_2
+        , height=usbc_2_height
         , xyr=usbc_xyr
         , extend_top=usbc_extend_top
         , tunnel_extend_bottom=usbc_2_tunnel_extend_bottom
