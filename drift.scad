@@ -2,7 +2,7 @@ use <laptop.scad>;
 
 include <consts.scad>;
 include <variants/model_15in.scad>;
-include <variants/cr10_fc.scad>
+include <variants/cr10.scad>
 
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
@@ -17,7 +17,10 @@ SH1_DEPTH = 50;
 SH1_HEIGHT = 30;
 SH1_OFF_R = 4;
 
-USBC_2_WIDTH = 12.20 + 0.15;
+USBC_2_WIDTH = 12.20 + 0.15 /*t2*/ + 0.2;
+USBC_2_DEPTH = 6.45 + 0.15;
+USBC_2_HEIGHT= 22.68;
+USBC_2_XYR = 1.25 /*t2*/ + 0.25;
 
 // L brackets
 LBR_WIDTH = 33;
@@ -73,9 +76,9 @@ translate([-17, 17, 27])
         , usbc_1_depth=USBC_DEPTH
         , usbc_1_height=USBC_1_HEIGHT
         , usbc_2_width=USBC_2_WIDTH
-        , usbc_2_depth=6.45 + 0.15
-        , usbc_2_height=22.68
-        , usbc_2_xyr=1.25
+        , usbc_2_depth=USBC_2_DEPTH
+        , usbc_2_height=USBC_2_HEIGHT
+        , usbc_2_xyr=USBC_2_XYR
         , usbc_1_dy=USBC_1_DY
         , usbc_1_dx=USBC_1_DX
         , usbc_2_dy=USBC_2_DY
