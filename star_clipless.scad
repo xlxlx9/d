@@ -78,7 +78,7 @@ difference() {
         , usbc_tunnel_xy_padding=USBC_TUNNEL_XY_PADDING
         , usbc_1_tunnel_extend_bottom=44
         , usbc_2_tunnel_extend_bottom=36
-        , usbc_extend_top=2
+        , usbc_extend_top=6
         , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, 18, -30], [0, 40, -37]]
         , tunnel_2=[[0, 0, 0], [0, 0, -12], [0, 5, -20], [0, 30, -28]]
         , psink=PAD_SINK

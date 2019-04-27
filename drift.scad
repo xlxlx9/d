@@ -86,7 +86,7 @@ translate([-17, 17, 27])
         , usbc_tunnel_xy_padding=USBC_TUNNEL_XY_PADDING
         , usbc_1_tunnel_extend_bottom=50
         , usbc_2_tunnel_extend_bottom=30
-        , usbc_extend_top=2
+        , usbc_extend_top=16
         , tunnel_1=[]
         , tunnel_2=[]
         , delicate=true // cause lag in preview, switch before Render
