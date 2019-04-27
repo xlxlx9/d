@@ -104,6 +104,7 @@ for(t = [-1,1]) {
 } // diff::br
 } // intersection
 
+difference() {
 // plate
 translate([0, 0, -40])
 //translate([0, 0, PLATE_SINK])
@@ -125,3 +126,7 @@ difference() {
     }
   }
 }
+*translate([0, 0, -40 - PLATE_HEIGHT * .6 -2 * PLATE_SINK]) rotate([0, 0, 45])
+  scale([1.6, 1.6, 1.6])
+    cube([PLATE_WDITH, PLATE_WDITH, PLATE_HEIGHT], center=true);
+} // difference
