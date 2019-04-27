@@ -27,8 +27,8 @@ LBR_WIDTH = 33;
 LBR_DEPTH = 1.14;
 LBR_HEIGHT_V = 26.3;
 LBR_HOLE_R = 4.95;
-LBR_HOLE_CZ = 17.6 + LBR_HOLE_R / 2;
-LBR_HOLE_CX = 15.2 / 2 + LBR_HOLE_R / 2;
+LBR_HOLE_CZ = 17.6 + LBR_HOLE_R / 2 /*t2*/ - 0.8;
+LBR_HOLE_CX = 15.2 / 2 + LBR_HOLE_R / 2 /*t2*/ - 0.8;
 LBR_SCREW_R = 2.15;
 
 intersection() {
