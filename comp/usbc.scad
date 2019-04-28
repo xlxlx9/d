@@ -3,7 +3,7 @@ module usbc_x(
   , depth=6
   , xyr = 3
   , height=7
-  , extend_top=0
+  , extend_top=2
   , use_tunnel=true
   , tunnel_angle=90
   , tunnel_extend_top=5
