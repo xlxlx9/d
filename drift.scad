@@ -10,7 +10,7 @@ extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
 PLATE_WDITH = 90;
 PLATE_RADIUS = 16;
 PLATE_HEIGHT = 20;
-PLATE_SINK = 5;
+PLATE_SINK = 5.6;
 
 SH1_WDITH = 68;
 SH1_DEPTH = 50;
@@ -101,7 +101,7 @@ translate([-17, 17, 27])
     cube([LBR_WIDTH, 2 * LBR_DEPTH, LBR_HEIGHT_V * 2], center=true);
 // screws
 for(t = [-1,1]) {
-  translate([LBR_HOLE_CX * t, 0, LBR_HOLE_CZ - SH1_OFF_R + PLATE_SINK])
+  translate([LBR_HOLE_CX * t, 0, LBR_HOLE_CZ - SH1_OFF_R + PLATE_SINK - LBR_DEPTH])
     rotate([90, 0, 0])
     cylinder(h=3 * SH1_HEIGHT, r=LBR_SCREW_R, center=true);
 } // for t cylinder
@@ -129,7 +129,7 @@ difference() {
   *rotate([0, 0, 45]) square([LBR_WIDTH, LBR_HEIGHT_V * 2 + SH1_HEIGHT], center=true);
   for(i = [-1, 1]) {
     for(j = [-1, 1]) {
-      translate([LBR_HOLE_CX * i, (LBR_HOLE_CZ + SH1_HEIGHT / 2) * j, 0])
+      translate([LBR_HOLE_CX * i, (LBR_HOLE_CZ + SH1_HEIGHT / 2 - LBR_DEPTH) * j, 0])
         cylinder(h=3 * PLATE_HEIGHT, r=LBR_SCREW_R, center=true);
     }
   }
