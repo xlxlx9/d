@@ -89,9 +89,10 @@ translate([-17, 17, 12])
         , usbc_extend_top=16
         , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, -11, -20], [0, -30, -47]]
         , tunnel_2=[]
+        , psink=PAD_SINK
         , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
-rotate([0, extra_deg - 90, -45]) translate([28, -0.25, -25])
+rotate([0, extra_deg - 90, -45]) translate([28, -0.125, -25])
     cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
 // sink for L brackets
