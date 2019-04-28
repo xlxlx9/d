@@ -13,7 +13,7 @@ PLATE_HEIGHT = 20;
 PLATE_SINK = 5.6;
 
 SH1_WDITH = 68;
-SH1_DEPTH = 50;
+SH1_DEPTH = SH1_WDITH * 25 / 36;
 SH1_HEIGHT = 30;
 SH1_OFF_R = 4;
 
@@ -57,7 +57,7 @@ union() {
     offset(r=SH1_OFF_R)
     union() {
       square([SH1_DEPTH, SH1_WDITH]);
-      polygon([[0, 0], [0, SH1_WDITH], [-SH1_WDITH / 2, SH1_WDITH / 2]]);
+      polygon([[0, 0], [0, SH1_WDITH], [-SH1_WDITH * 7 / 18, SH1_WDITH / 2]]);
     }
   }
 }
