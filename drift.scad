@@ -2,7 +2,7 @@ use <laptop.scad>;
 
 include <consts.scad>;
 include <variants/model_15in.scad>;
-include <variants/cr10.scad>
+include <variants/cr10_fc.scad>
 
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
