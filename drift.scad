@@ -26,7 +26,7 @@ USBC_2_XYR = 1.25 /*t2*/ + 0.25;
 LBR_WIDTH = 33;
 LBR_DEPTH = 1.14;
 LBR_HEIGHT_V = 26.3;
-LBR_HOLE_CZ = 20.075 /*t2*/ - 0.8;
+LBR_HOLE_CZ = 20.075 /*t2*/ - 0.8 /*t3*/ - 1.0;
 LBR_HOLE_CX = 10.075 /*t2*/ - 0.8;
 echo(LBR_HOLE_CX, LBR_HOLE_CZ);
 LBR_SCREW_R = 1.6;
