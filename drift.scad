@@ -26,10 +26,10 @@ USBC_2_XYR = 1.25 /*t2*/ + 0.25;
 LBR_WIDTH = 33;
 LBR_DEPTH = 1.14;
 LBR_HEIGHT_V = 26.3;
-LBR_HOLE_R = 4.95;
-LBR_HOLE_CZ = 17.6 + LBR_HOLE_R / 2 /*t2*/ - 0.8;
-LBR_HOLE_CX = 15.2 / 2 + LBR_HOLE_R / 2 /*t2*/ - 0.8;
-LBR_SCREW_R = 2.15;
+LBR_HOLE_CZ = 20.075 /*t2*/ - 0.8;
+LBR_HOLE_CX = 10.075 /*t2*/ - 0.8;
+echo(LBR_HOLE_CX, LBR_HOLE_CZ);
+LBR_SCREW_R = 1.6;
 
 intersection() {
 * translate([40, 70, 0])
@@ -121,8 +121,12 @@ difference() {
         square(PLATE_WDITH - 2 * PLATE_RADIUS, center=true);
     }
   cube([SH1_WDITH + 2 * SH1_OFF_R, SH1_HEIGHT, PLATE_SINK * 2], center=true);
+  // for export svg for laser cutting
+  *rotate([0, 0, 45]) square([SH1_WDITH + 2 * SH1_OFF_R, SH1_HEIGHT], center=true);
   translate([0, 0, 0]) 
     cube([LBR_WIDTH, LBR_HEIGHT_V * 2 + SH1_HEIGHT, 2 * LBR_DEPTH], center=true);
+  // for export svg for laser cutting
+  *rotate([0, 0, 45]) square([LBR_WIDTH, LBR_HEIGHT_V * 2 + SH1_HEIGHT], center=true);
   for(i = [-1, 1]) {
     for(j = [-1, 1]) {
       translate([LBR_HOLE_CX * i, (LBR_HOLE_CZ + SH1_HEIGHT / 2) * j, 0])
