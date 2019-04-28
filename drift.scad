@@ -19,7 +19,7 @@ SH1_OFF_R = 4;
 
 USBC_2_WIDTH = 12.20 + 0.15 /*t2*/ + 0.2;
 USBC_2_DEPTH = 6.45 + 0.15;
-USBC_2_HEIGHT= 22.68;
+USBC_2_HEIGHT= 22.68 /*t3*/ + 0.08;
 USBC_2_XYR = 1.25 /*t2*/ + 0.25;
 
 // L brackets
