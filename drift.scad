@@ -63,7 +63,7 @@ union() {
 }
 
 color("Silver", 1)
-translate([-17, 17, 27])
+translate([-17, 17, 12])
   rotate([extra_deg - 90, 0, 45])
       case_ss(
           depth=CASE_DEPTH
@@ -87,11 +87,11 @@ translate([-17, 17, 27])
         , usbc_1_tunnel_extend_bottom=50
         , usbc_2_tunnel_extend_bottom=30
         , usbc_extend_top=16
-        , tunnel_1=[]
+        , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, -11, -20], [0, -30, -47]]
         , tunnel_2=[]
         , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
- rotate([0, 0, -45]) translate([40, -0.25, 0])
+rotate([0, extra_deg - 90, -45]) translate([28, -0.25, -25])
     cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
 // sink for L brackets
