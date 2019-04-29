@@ -12,10 +12,11 @@ PLATE_RADIUS = 16;
 PLATE_HEIGHT = 20;
 PLATE_SINK = 5.6;
 
-SH1_WDITH = 68;
-SH1_DEPTH = SH1_WDITH * 25 / 36;
-SH1_HEIGHT = 30;
 SH1_OFF_R = 4;
+SH1_SINK_WIDTH = 68;
+SH1_WDITH = 120 - 2 * SH1_OFF_R;
+SH1_DEPTH = (SH1_WDITH + 2 * SH1_OFF_R) * 25 / 36 - 2 * SH1_OFF_R;
+SH1_HEIGHT = 30;
 
 USBC_2_WIDTH = 12.20 + 0.15 /*t2*/ + 0.2;
 USBC_2_DEPTH = 6.45 + 0.15;
@@ -24,7 +25,7 @@ USBC_2_XYR = 1.25 /*t2*/ + 0.25;
 
 // L brackets
 LBR_WIDTH = 33;
-LBR_DEPTH = 1.14;
+LBR_DEPTH = 1.4;
 LBR_HEIGHT_V = 26.3;
 LBR_HOLE_CZ = 20.075 /*t2*/ - 0.8 /*t3*/ - 1.0;
 LBR_HOLE_CX = 10.075 /*t2*/ - 0.8;
@@ -57,13 +58,15 @@ union() {
     offset(r=SH1_OFF_R)
     union() {
       square([SH1_DEPTH, SH1_WDITH]);
+      translate([PLATE_SINK, (SH1_WDITH - SH1_SINK_WIDTH) / 2 + SH1_OFF_R])
+        square([SH1_DEPTH + PLATE_SINK - SH1_OFF_R * 2, SH1_SINK_WIDTH - SH1_OFF_R * 2]);
       polygon([[0, 0], [0, SH1_WDITH], [-SH1_WDITH * 7 / 18, SH1_WDITH / 2]]);
     }
   }
 }
 
 color("Silver", 1)
-translate([-17, 17, 12])
+translate([0, 0, 19])
   rotate([extra_deg - 90, 0, 45])
       case_ss(
           depth=CASE_DEPTH
@@ -92,17 +95,17 @@ translate([-17, 17, 12])
         , psink=PAD_SINK
         , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
-rotate([0, extra_deg - 90, -45]) translate([28, -0.125, -25])
+rotate([0, extra_deg - 90, -45]) translate([47, -0.125, -38])
     cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
 // sink for L brackets
-  translate([0, SH1_HEIGHT / 2, 0]) 
+  translate([0, SH1_HEIGHT / 2, -PLATE_SINK]) 
     cube([LBR_WIDTH, 2 * LBR_DEPTH, LBR_HEIGHT_V * 2], center=true);
-  translate([0, -SH1_HEIGHT / 2, 0]) 
+  translate([0, -SH1_HEIGHT / 2, -PLATE_SINK]) 
     cube([LBR_WIDTH, 2 * LBR_DEPTH, LBR_HEIGHT_V * 2], center=true);
 // screws
 for(t = [-1,1]) {
-  translate([LBR_HOLE_CX * t, 0, LBR_HOLE_CZ - SH1_OFF_R + PLATE_SINK - LBR_DEPTH])
+  translate([LBR_HOLE_CX * t, 0, LBR_HOLE_CZ - SH1_OFF_R - LBR_DEPTH])
     rotate([90, 0, 0])
     cylinder(h=3 * SH1_HEIGHT, r=LBR_SCREW_R, center=true);
 } // for t cylinder
@@ -112,7 +115,7 @@ for(t = [-1,1]) {
 difference() {
 // plate
 translate([0, 0, -40])
-//translate([0, 0, PLATE_SINK])
+//translate([0, 0, -SH1_OFF_R])
 color("Burlywood", 1)
 difference() {
   rotate([0, 0, 45])
@@ -121,7 +124,7 @@ difference() {
       offset(r=PLATE_RADIUS)
         square(PLATE_WDITH - 2 * PLATE_RADIUS, center=true);
     }
-  cube([SH1_WDITH + 2 * SH1_OFF_R, SH1_HEIGHT, PLATE_SINK * 2], center=true);
+  cube([SH1_SINK_WIDTH + 2 * SH1_OFF_R, SH1_HEIGHT, PLATE_SINK * 2], center=true);
   // for export svg for laser cutting
   *rotate([0, 0, 45]) square([SH1_WDITH + 2 * SH1_OFF_R, SH1_HEIGHT], center=true);
   translate([0, 0, 0]) 
