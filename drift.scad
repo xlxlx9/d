@@ -14,7 +14,7 @@ PLATE_SINK = 5.6;
 
 SH1_OFF_R = 4;
 SH1_SINK_WIDTH = 68;
-SH1_WDITH = 120 - 2 * SH1_OFF_R;
+SH1_WDITH = 102 - 2 * SH1_OFF_R;
 SH1_DEPTH = (SH1_WDITH + 2 * SH1_OFF_R) * 25 / 36 - 2 * SH1_OFF_R;
 SH1_HEIGHT = 30;
 
@@ -66,7 +66,7 @@ union() {
 }
 
 color("Silver", 1)
-translate([0, 0, 19])
+translate([-2, 2, 19])
   rotate([extra_deg - 90, 0, 45])
       case_ss(
           depth=CASE_DEPTH
@@ -95,7 +95,7 @@ translate([0, 0, 19])
         , psink=PAD_SINK
         , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
-rotate([0, extra_deg - 90, -45]) translate([47, -0.125, -38])
+rotate([0, extra_deg - 90, -45]) translate([50, -0.125, -38])
     cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
 // sink for L brackets
