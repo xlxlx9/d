@@ -12,6 +12,10 @@ include <variants/cr10.scad>
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
 
+// hollow for cable observing
+HW_R = 6;
+HW_DIST = 4;
+
 intersection() {
 
 difference() {
@@ -78,6 +82,12 @@ difference() {
         ]
 //        , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
+      // oberserving cables
+      translate([0, (USBC_2_DY + USBC_1_DY) / 2, HW_R]) rotate([0, 90, 0])
+      hull() {
+        translate([0, -HW_DIST, 0]) cylinder(h=2 * BASE_WIDTH, r=HW_R, center=false);
+        translate([0,  HW_DIST, 0]) cylinder(h=2 * BASE_WIDTH, r=HW_R, center=false);
+      }
     }
   // widen tunnel
   //translate([0, 0, 30])
