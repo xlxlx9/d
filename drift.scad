@@ -32,6 +32,10 @@ LBR_HOLE_CX = 10.075 /*t2*/ - 0.8;
 echo(LBR_HOLE_CX, LBR_HOLE_CZ);
 LBR_SCREW_R = 1.6;
 
+// hollow for cable observing
+HW_R = 6;
+HW_DIST = 4;
+
 intersection() {
 * translate([40, 70, 0])
   cube([100, 100, 40], center=true);
@@ -67,7 +71,7 @@ union() {
 
 color("Silver", 1)
 translate([-2, 2, 19])
-  rotate([extra_deg - 90, 0, 45])
+  rotate([extra_deg - 90, 0, 45]) union() {
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
@@ -95,6 +99,13 @@ translate([-2, 2, 19])
         , psink=PAD_SINK
         , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
+      // oberserving cables
+      translate([0, (USBC_2_DY + USBC_1_DY) / 2, HW_R]) rotate([0, 90, 0])
+      hull() {
+        translate([0, -HW_DIST, 0]) cylinder(h=2 * SH1_HEIGHT, r=HW_R, center=false);
+        translate([0,  HW_DIST, 0]) cylinder(h=2 * SH1_HEIGHT, r=HW_R, center=false);
+      }
+  }
 rotate([0, extra_deg - 90, -45]) translate([50, -0.125, -38])
     cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
