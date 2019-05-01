@@ -11,12 +11,13 @@ PLATE_WDITH = 90;
 PLATE_RADIUS = 16;
 PLATE_HEIGHT = 20;
 PLATE_SINK = 5.6;
+PLATE_LEEWAY = 0.5;
 
 SH1_OFF_R = 4;
-SH1_SINK_WIDTH = 68;
+SH1_SINK_WIDTH = 76;
 SH1_WDITH = 102 - 2 * SH1_OFF_R;
 SH1_DEPTH = (SH1_WDITH + 2 * SH1_OFF_R) * 25 / 36 - 2 * SH1_OFF_R;
-SH1_HEIGHT = 30;
+SH1_HEIGHT = 29.2;
 
 USBC_2_WIDTH = 12.20 + 0.15 /*t2*/ + 0.2;
 USBC_2_DEPTH = 6.45 + 0.15;
@@ -35,6 +36,12 @@ LBR_SCREW_R = 1.6;
 // hollow for cable observing
 HW_R = 6;
 HW_DIST = 4;
+
+// VENT
+VENT_DX = -4.5;
+VENT_DY = -5.4;
+VENT_DZ = 35;
+VENT_R = 3;
 
 intersection() {
 * translate([40, 70, 0])
@@ -63,7 +70,7 @@ union() {
     union() {
       square([SH1_DEPTH, SH1_WDITH]);
       translate([PLATE_SINK, (SH1_WDITH - SH1_SINK_WIDTH) / 2 + SH1_OFF_R])
-        square([SH1_DEPTH + PLATE_SINK - SH1_OFF_R * 2, SH1_SINK_WIDTH - SH1_OFF_R * 2]);
+        square([SH1_DEPTH + PLATE_SINK - SH1_OFF_R, SH1_SINK_WIDTH - SH1_OFF_R * 2]);
       polygon([[0, 0], [0, SH1_WDITH], [-SH1_WDITH * 7 / 18, SH1_WDITH / 2]]);
     }
   }
@@ -105,9 +112,13 @@ translate([-2, 2, 19])
         translate([0, -HW_DIST, 0]) cylinder(h=2 * SH1_HEIGHT, r=HW_R, center=false);
         translate([0,  HW_DIST, 0]) cylinder(h=2 * SH1_HEIGHT, r=HW_R, center=false);
       }
+      // widen tunnels
+      translate([0, (USBC_1_DY + USBC_2_DY) / 2, -42 / 2 - USBC_2_HEIGHT - 7])
+        cube([USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 24, 42], center=true);
+      // vent
+      translate([VENT_DX, VENT_DY, VENT_DZ])
+        cylinder(h=100, r=VENT_R);
   }
-rotate([0, extra_deg - 90, -45]) translate([50, -0.125, -38])
-    cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
 // sink for L brackets
   translate([0, SH1_HEIGHT / 2, -PLATE_SINK]) 
@@ -135,7 +146,8 @@ difference() {
       offset(r=PLATE_RADIUS)
         square(PLATE_WDITH - 2 * PLATE_RADIUS, center=true);
     }
-  cube([SH1_SINK_WIDTH + 2 * SH1_OFF_R, SH1_HEIGHT, PLATE_SINK * 2], center=true);
+  cube([SH1_SINK_WIDTH + 2 * SH1_OFF_R + 2 * PLATE_LEEWAY, 
+        SH1_HEIGHT + 2 * PLATE_LEEWAY, PLATE_SINK * 2], center=true);
   // for export svg for laser cutting
   *rotate([0, 0, 45]) square([SH1_WDITH + 2 * SH1_OFF_R, SH1_HEIGHT], center=true);
   translate([0, 0, 0]) 
