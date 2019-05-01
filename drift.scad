@@ -11,6 +11,7 @@ PLATE_WDITH = 90;
 PLATE_RADIUS = 16;
 PLATE_HEIGHT = 20;
 PLATE_SINK = 5.6;
+PLATE_LEEWAY = 0.5;
 
 SH1_OFF_R = 4;
 SH1_SINK_WIDTH = 76;
@@ -136,7 +137,8 @@ difference() {
       offset(r=PLATE_RADIUS)
         square(PLATE_WDITH - 2 * PLATE_RADIUS, center=true);
     }
-  cube([SH1_SINK_WIDTH + 2 * SH1_OFF_R, SH1_HEIGHT, PLATE_SINK * 2], center=true);
+  cube([SH1_SINK_WIDTH + 2 * SH1_OFF_R + 2 * PLATE_LEEWAY, 
+        SH1_HEIGHT + 2 * PLATE_LEEWAY, PLATE_SINK * 2], center=true);
   // for export svg for laser cutting
   *rotate([0, 0, 45]) square([SH1_WDITH + 2 * SH1_OFF_R, SH1_HEIGHT], center=true);
   translate([0, 0, 0]) 
