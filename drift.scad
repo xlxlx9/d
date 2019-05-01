@@ -105,9 +105,10 @@ translate([-2, 2, 19])
         translate([0, -HW_DIST, 0]) cylinder(h=2 * SH1_HEIGHT, r=HW_R, center=false);
         translate([0,  HW_DIST, 0]) cylinder(h=2 * SH1_HEIGHT, r=HW_R, center=false);
       }
+      // widen tunnels
+      translate([0, (USBC_1_DY + USBC_2_DY) / 2, -42 / 2 - USBC_2_HEIGHT - 7])
+        cube([USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 24, 42], center=true);
   }
-rotate([0, extra_deg - 90, -45]) translate([50, -0.125, -38])
-    cube([30, USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 42], center=true);
 } // difference
 // sink for L brackets
   translate([0, SH1_HEIGHT / 2, -PLATE_SINK]) 
