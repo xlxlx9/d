@@ -37,6 +37,12 @@ LBR_SCREW_R = 1.6;
 HW_R = 6;
 HW_DIST = 4;
 
+// VENT
+VENT_DX = -4.5;
+VENT_DY = -5.4;
+VENT_DZ = 35;
+VENT_R = 3;
+
 intersection() {
 * translate([40, 70, 0])
   cube([100, 100, 40], center=true);
@@ -109,6 +115,9 @@ translate([-2, 2, 19])
       // widen tunnels
       translate([0, (USBC_1_DY + USBC_2_DY) / 2, -42 / 2 - USBC_2_HEIGHT - 7])
         cube([USBC_2_WIDTH + USBC_TUNNEL_XY_PADDING * 2, 24, 42], center=true);
+      // vent
+      translate([VENT_DX, VENT_DY, VENT_DZ])
+        cylinder(h=100, r=VENT_R);
   }
 } // difference
 // sink for L brackets
