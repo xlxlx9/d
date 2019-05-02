@@ -1,4 +1,4 @@
 
 CASE_WIDTH = 349.3;
-CASE_HEIGHT= 15.5; /*r6*/
+CASE_HEIGHT= /*r6*/ 15.5 /*r9*/+ 0.2;
 CASE_DEPTH = 240.7;
