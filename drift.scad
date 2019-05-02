@@ -65,14 +65,16 @@ union() {
   rotate([0, 0, 45])
   translate([-SH1_HEIGHT / 2, 0, 0]) rotate([0, 90, 0])
   linear_extrude(height=SH1_HEIGHT) {
-  translate([-SH1_DEPTH, -SH1_WDITH / 2])
-    offset(r=SH1_OFF_R)
-    union() {
-      square([SH1_DEPTH, SH1_WDITH]);
-      translate([PLATE_SINK, (SH1_WDITH - SH1_SINK_WIDTH) / 2 + SH1_OFF_R])
-        square([SH1_DEPTH + PLATE_SINK - SH1_OFF_R, SH1_SINK_WIDTH - SH1_OFF_R * 2]);
-      polygon([[0, 0], [0, SH1_WDITH], [-SH1_WDITH * 7 / 18, SH1_WDITH / 2]]);
+    translate([-SH1_DEPTH, -SH1_WDITH / 2]) {
+      offset(r=SH1_OFF_R)
+      union() {
+        square([SH1_DEPTH, SH1_WDITH]);
+        polygon([[0, 0], [0, SH1_WDITH], [-SH1_WDITH * 7 / 18, SH1_WDITH / 2]]);
+      }
     }
+    translate([-SH1_DEPTH, -SH1_SINK_WIDTH / 2 + SH1_OFF_R])
+      offset(r=SH1_OFF_R)
+        square([SH1_DEPTH + PLATE_SINK, SH1_SINK_WIDTH - SH1_OFF_R * 2]);
   }
 }
 
