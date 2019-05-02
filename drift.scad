@@ -16,7 +16,7 @@ PLATE_LEEWAY = 0.5;
 SH1_OFF_R = 4;
 SH1_SINK_WIDTH = 76;
 SH1_WDITH = 102 - 2 * SH1_OFF_R;
-SH1_DEPTH = (SH1_WDITH + 2 * SH1_OFF_R) * 25 / 36 - 2 * SH1_OFF_R;
+SH1_DEPTH = (SH1_WDITH + 2 * SH1_OFF_R) * 19 / 36 - 2 * SH1_OFF_R;
 SH1_HEIGHT = 29.2;
 
 USBC_2_WIDTH = 12.20 + 0.15 /*t2*/ + 0.2;
@@ -38,7 +38,7 @@ LBR_SCREW_R = 1.6;
 
 // hollow for cable observing
 HW_R = 6;
-HW_DIST = 4;
+HW_DIST = 8;
 
 // VENT
 VENT_DX = -4.5;
@@ -82,7 +82,7 @@ union() {
 }
 
 color("Silver", 1)
-translate([-2, 2, 19])
+translate([-2, 2, 8])
   rotate([extra_deg - 90, 0, 45]) union() {
       case_ss(
           depth=CASE_DEPTH
