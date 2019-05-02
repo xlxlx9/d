@@ -24,6 +24,9 @@ USBC_2_DEPTH = 6.45 + 0.15;
 USBC_2_HEIGHT= 22.68 /*t3*/ + 0.08;
 USBC_2_XYR = 1.25 /*t2*/ + 0.25;
 
+PAD_PTT2 = 4.2;
+PAD_SINK = 0.6;
+
 // L brackets
 LBR_WIDTH = 33;
 LBR_DEPTH = 1.4;
@@ -105,6 +108,7 @@ translate([-2, 2, 19])
         , usbc_extend_top=16
         , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, -11, -20], [0, -30, -47]]
         , tunnel_2=[]
+        , ptt2=PAD_PTT2
         , psink=PAD_SINK
         , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
