@@ -46,6 +46,8 @@ VENT_DY = -5.4;
 VENT_DZ = 35;
 VENT_R = 3;
 
+ENGRAVING_SINK = 1.8;
+
 intersection() {
 * translate([40, 70, 0])
   cube([100, 100, 40], center=true);
@@ -126,6 +128,12 @@ translate([-2, 2, 8])
         cylinder(h=100, r=VENT_R);
   }
 } // difference
+
+translate([-SH1_WDITH / 2, -BASE_WIDTH / 2 + ENGRAVING_SINK, 0])
+  rotate([90, 0, 0]) 
+    linear_extrude(height=ENGRAVING_SINK) {
+      scale(15.2) import("assets/engraving_1.dxf");
+    }
 // sink for L brackets
   translate([0, SH1_HEIGHT / 2, -PLATE_SINK]) 
     cube([LBR_WIDTH, 2 * LBR_DEPTH, LBR_HEIGHT_V * 2], center=true);
