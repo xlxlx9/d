@@ -46,7 +46,7 @@ VENT_DY = -5.4;
 VENT_DZ = 35;
 VENT_R = 3;
 
-ENGRAVING_SINK = 1.8;
+EMBOSS_HEIGHT = 0.4;
 
 intersection() {
 * translate([40, 70, 0])
@@ -76,6 +76,14 @@ union() {
       offset(r=SH1_OFF_R)
         square([SH1_DEPTH + PLATE_SINK, SH1_SINK_WIDTH - SH1_OFF_R * 2]);
   }
+  // emboss
+  translate([-SH1_WDITH / 2, -SH1_HEIGHT / 2 + EMBOSS_HEIGHT, 0])
+    rotate([90, 0, 0]) 
+      linear_extrude(height=EMBOSS_HEIGHT * 2) {
+        offset(r=4)
+        offset(r=-4)
+        scale(15.2) import("assets/engraving_1.dxf");
+      }
 }
 
 color("Silver", 1)
@@ -123,17 +131,12 @@ translate([-3, 0, 8])
         cylinder(h=100, r=VENT_R);
   }
 } // difference
-
-translate([-SH1_WDITH / 2, -BASE_WIDTH / 2 + ENGRAVING_SINK, 0])
-  rotate([90, 0, 0]) 
-    linear_extrude(height=ENGRAVING_SINK) {
-      scale(15.2) import("assets/engraving_1.dxf");
-    }
 // sink for L brackets
   translate([0, SH1_HEIGHT / 2, -PLATE_SINK]) 
     cube([LBR_WIDTH, 2 * LBR_DEPTH, LBR_HEIGHT_V * 2], center=true);
-  translate([0, -SH1_HEIGHT / 2, -PLATE_SINK]) 
-    cube([LBR_WIDTH, 2 * LBR_DEPTH, LBR_HEIGHT_V * 2], center=true);
+  // compensate for emboss
+  translate([0, -SH1_HEIGHT / 2 - EMBOSS_HEIGHT * 2, -PLATE_SINK]) 
+    cube([LBR_WIDTH, 2 * LBR_DEPTH + EMBOSS_HEIGHT * 4, LBR_HEIGHT_V * 2], center=true);
 // screws
 for(t = [-1,1]) {
   translate([LBR_HOLE_CX * t, 0, LBR_HOLE_CZ - SH1_OFF_R - LBR_DEPTH])
