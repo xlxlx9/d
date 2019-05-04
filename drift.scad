@@ -60,14 +60,9 @@ intersection() {
 //rotate([-90, 0, 0])
 color("LightYellow", 1)
 difference() { // diff::br
-rotate([0, 0, 45]) difference() {
+difference() {
 union() {
-*  translate([0, 0, -PLATE_HEIGHT])
-  linear_extrude(height=PLATE_HEIGHT) {
-    offset(r=PLATE_RADIUS)
-      square(PLATE_WDITH - 2 * PLATE_RADIUS, center=true);
-  }
-  rotate([0, 0, 45])
+  rotate([0, 0, 90])
   translate([-SH1_HEIGHT / 2, 0, 0]) rotate([0, 90, 0])
   linear_extrude(height=SH1_HEIGHT) {
     translate([-SH1_DEPTH, -SH1_WDITH / 2]) {
@@ -84,8 +79,8 @@ union() {
 }
 
 color("Silver", 1)
-translate([-2, 2, 8])
-  rotate([extra_deg - 90, 0, 45]) union() {
+translate([-3, 0, 8])
+  rotate([extra_deg - 90, 0, 90]) union() {
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
