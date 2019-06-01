@@ -36,6 +36,7 @@ difference() {
       , back_extension_under = BASE_BACK_UNDER
       , back_plate_height = BASE_PLATE_HEIGHT
       , back_plate_sink = BASE_PLATE_SINK
+      , back_height_under = 13
       , r = BASE_EDGE_RADIUS
     );
     translate([
