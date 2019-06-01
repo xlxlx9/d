@@ -13,20 +13,14 @@ module anchor(
   linear_extrude(height=width) 
   difference() {
     union() {
-      // 1/4 pie
+      // 1/n pie
       r = min(height_above_surface / 2 - 0.01, r);
-*      difference() {
-        circle(r=rotate_radius);
-        translate([-1.5 * rotate_radius, 0.1 * rotate_radius]) 
-          square(3 * rotate_radius, 1.5 * rotate_radius);
-        translate([-1.6 * rotate_radius, -1.1 * rotate_radius]) 
-          square(1.5 * rotate_radius, 1.5 * rotate_radius);
-      }
-     intersection() {
+      offset(r=r) offset(r=-r)
+      intersection() {
         translate([-back_plate_depth, 0])
           circle(back_plate_depth + rotate_radius);
-        translate([-height_above_surface / 4, height_above_surface / 4]) mirror([0, 1, 0])
-        square([rotate_radius + height_above_surface / 4, back_height_under + height_above_surface / 4]);
+        translate([-back_extension_depth, height_above_surface]) mirror([0, 1, 0])
+        square([rotate_radius + back_extension_depth, back_height_under + height_above_surface]);
       }
       // top
       translate([r - back_extension_depth, r])
@@ -37,17 +31,6 @@ module anchor(
           ]);
       }
 
-      // back surface, domanated by back_extension_depth
-      translate([r - back_extension_depth, r - (back_plate_sink + back_plate_height / 2)])
-        difference() {
-          offset(r=r) {
-            square([back_extension_depth * 1.25 - 0 * r, back_plate_sink + back_plate_height / 2 + r]);
-          }
-          translate([- 2 * r - 0.125 * back_extension_depth, back_plate_sink + back_plate_height / 2 - r + height_above_surface / 2]) 
-            square([back_extension_depth * 1.5 + 4 * r, 2 * r + rotate_radius]);
-          translate([-r + back_extension_depth, -r * 1.5]) 
-            square([back_extension_depth + 2 * r, rotate_radius + 4 * r]);
-        }
       // back bottom,  domanated by back_extension_under
       translate([r - back_extension_under, r - back_height_under])
         difference() {
