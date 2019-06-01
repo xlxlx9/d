@@ -1,8 +1,8 @@
 include <consts.scad>
 use <comp/anchor.scad>
 
-BASE_FRONT_EXT = 10;
-BASE_BACK_EXT = 12;
+BASE_FRONT_EXT = 10 - 2;
+BASE_BACK_EXT = 15;
 BASE_HEIGHT_ABOVE_SURFACE = 1.4;
 
 FLIP_EDGE_HEIGHT = 1.9;
@@ -13,7 +13,6 @@ CLIP_HEIGHT = 3;
 CLIP_WIDTH = BASE_WIDTH / 4;
 
 $fn=128;
-
 difference() {
   union() {
     anchor(
@@ -25,27 +24,27 @@ difference() {
       , back_extension_under = BASE_BACK_UNDER
       , back_plate_height = BASE_PLATE_HEIGHT
       , back_plate_sink = BASE_PLATE_SINK
+      , back_height_under = CLIP_HEIGHT + BASE_PLATE_SINK + BASE_PLATE_HEIGHT + FLIP_FRONT_HEIGHT
       , r = BASE_EDGE_RADIUS
     );
+    r = min(BASE_EDGE_RADIUS, BASE_HEIGHT_ABOVE_SURFACE / 2 - 0.01);
     translate([
-        BASE_ROTATE_RADIUS * 0.6, 
+        BASE_ROTATE_RADIUS * 0.6,
         -CLIP_HEIGHT- BASE_PLATE_SINK - BASE_PLATE_HEIGHT - FLIP_FRONT_HEIGHT, 
         0
     ])
       mirror([1, 0, 0])
-        cube([
-            BASE_BACK_UNDER + BASE_ROTATE_RADIUS * 0.6, 
-            CLIP_HEIGHT, 
-            BASE_WIDTH / 2 + CLIP_WIDTH
-        ]);
+        hull() {
+          translate([r, r, 0])
+            cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
+          translate([r, CLIP_HEIGHT - r, 0])
+            cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
+          translate([BASE_BACK_UNDER + BASE_ROTATE_RADIUS * 0.6 - r, CLIP_HEIGHT - r, 0])
+            cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
+          translate([BASE_BACK_UNDER + BASE_ROTATE_RADIUS * 0.6 - r, r, 0])
+            cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
+        }
   }
   translate([BASE_ROTATE_RADIUS - FLIP_EDGE_EXT, -FLIP_EDGE_HEIGHT, -5])
     cube([FLIP_EDGE_EXT + 5, FLIP_EDGE_HEIGHT, BASE_WIDTH + 10]);
-  translate([
-      0, 
-      -CLIP_HEIGHT- BASE_PLATE_SINK - BASE_PLATE_HEIGHT - FLIP_FRONT_HEIGHT - BASE_ROTATE_RADIUS,
-      0
-  ])
-  translate([-BASE_BACK_UNDER - 5, 0, -5])
-    cube([BASE_BACK_UNDER + BASE_ROTATE_RADIUS + 10, BASE_ROTATE_RADIUS, BASE_WIDTH + 10]);
 }
