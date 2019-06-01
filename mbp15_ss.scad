@@ -15,6 +15,7 @@ extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
 // hollow for cable observing
 HW_R = 6;
 HW_DIST = 4;
+FINGER_R = 9;
 
 intersection() {
 
@@ -29,6 +30,7 @@ difference() {
       , back_extension_under = BASE_BACK_UNDER
       , back_plate_height = BASE_PLATE_HEIGHT
       , back_plate_sink = BASE_PLATE_SINK
+      , back_height_under = 13.2
       , r = BASE_EDGE_RADIUS
     );
 
@@ -72,9 +74,11 @@ difference() {
         , usbc_1_tunnel_extend_bottom=44
         , usbc_2_tunnel_extend_bottom=36
         , usbc_extend_top=6
-        , tunnel_1=[[0, 0, 0], [0, 0, -10], [0, 4, -20], [0, 20, -47]]
+        , tunnel_1=[
+//            [0, 0, 0], [0, 0, -10], [0, 4, -20], [0, 20, -47]
+        ]
         , tunnel_2=[
-            [0, 0, 0], [0, 0, -12], [0, 5, -20], [0, 30, -28]
+//            [0, 0, 0], [0, 0, -12], [0, 5, -20], [0, 30, -28]
 //          , [0, 0, 0], [0, 0, -11], [0, 5, -20], [0, 28, -36]
 //          , [0, 0, 0], [0, 0, -10], [0, 4, -20], [0, 24, -42]
 //          , [0, 0, 0], [0, 0, -9],  [0, 2, -20], [0, 18, -47]
@@ -88,13 +92,27 @@ difference() {
         translate([0, -HW_DIST, 0]) cylinder(h=2 * BASE_WIDTH, r=HW_R, center=false);
         translate([0,  HW_DIST, 0]) cylinder(h=2 * BASE_WIDTH, r=HW_R, center=false);
       }
+      // widen tunnel
+      translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -44])
+        linear_extrude(height=24) {
+          offset(r=USBC_TUNNEL_XY_PADDING) {
+            square([USBC_WIDTH, USBC_DEPTH * 5], center=true);
+          }
+        }
+      translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2 + USBC_DEPTH * 1.75, -44 - 20])
+        linear_extrude(height=24) {
+          offset(r=USBC_TUNNEL_XY_PADDING) {
+            square([USBC_WIDTH, USBC_DEPTH * 1.5], center=true);
+          }
+        }
+      // push by finger
+      translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
+        mirror([0, 0, 1])
+          cylinder(r=FINGER_R, h=USBC_1_HEIGHT + 18);
+        translate([0, -2, -4.32 + 5]) rotate([0, 90, 0])
+          cylinder(r=30, h=FINGER_R * 2 + 5, center=true);
+      }
     }
-  // widen tunnel
-  //translate([0, 0, 30])
-  translate([0, 0, BASE_WIDTH / 2 - USBC_WIDTH / 2 - USBC_TUNNEL_XY_PADDING])
-    linear_extrude(height=USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING) {
-      polygon([[-27, -16], [5, -20], [-4, 20]]);
-  }
   // make room for bump
   translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
     cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
