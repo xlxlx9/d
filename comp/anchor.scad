@@ -25,8 +25,8 @@ module anchor(
      intersection() {
         translate([-back_plate_depth, 0])
           circle(back_plate_depth + rotate_radius);
-        translate([-2, 2]) mirror([0, 1, 0])
-        square([rotate_radius + 2, back_height_under + 2]);
+        translate([-height_above_surface / 4, height_above_surface / 4]) mirror([0, 1, 0])
+        square([rotate_radius + height_above_surface / 4, back_height_under + height_above_surface / 4]);
       }
       // top
       translate([r - back_extension_depth, r])
