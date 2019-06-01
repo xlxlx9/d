@@ -14,7 +14,6 @@ module anchor(
   difference() {
     union() {
       // 1/n pie
-      r = min(height_above_surface / 2 - 0.01, r);
       offset(r=r) offset(r=-r)
       intersection() {
         translate([-back_plate_depth, 0])
@@ -23,12 +22,15 @@ module anchor(
         square([rotate_radius + back_extension_depth, back_height_under + height_above_surface]);
       }
       // top
-      translate([r - back_extension_depth, r])
-      offset(r=r) {
-        square([
-            back_extension_depth + rotate_radius + front_extension_depth - 2 * r, 
-            height_above_surface - 2 * r
-          ]);
+      if(height_above_surface > 0) {
+        rs = min(height_above_surface / 2 - 0.01, r);
+        translate([rs - back_extension_depth, rs])
+        offset(r=rs) {
+          square([
+              back_extension_depth + rotate_radius + front_extension_depth - 2 * rs, 
+              height_above_surface - 2 * rs
+            ]);
+        }
       }
 
       // back bottom,  domanated by back_extension_under
@@ -50,6 +52,7 @@ module anchor(
   }
 }
 
+translate([-80, 0, 0]) anchor(height_above_surface=0, r=2.5, back_extension_depth=8, $fn=120);
 translate([-50, 0, 0]) anchor(height_above_surface=2, r=1, back_extension_depth=2, $fn=120);
 anchor(height_above_surface=8, r=2, back_extension_under=7, back_height_under= 7, $fn=120);
 translate([50, 0, 0]) anchor(height_above_surface=25, r=4, rotate_radius=13, back_extension_under=15, back_extension_depth=15, $fn=120);
