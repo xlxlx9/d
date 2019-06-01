@@ -2,8 +2,8 @@ include <consts.scad>
 use <comp/anchor.scad>
 
 BASE_FRONT_EXT = 10;
-BASE_BACK_EXT = 12;
-BASE_HEIGHT_ABOVE_SURFACE = 1.4;
+BASE_BACK_EXT = 15;
+BASE_HEIGHT_ABOVE_SURFACE = 0;
 
 FLIP_EDGE_HEIGHT = 1.9;
 FLIP_EDGE_EXT = 2.6;
@@ -22,7 +22,7 @@ USB_TUNNEL_BOTTOM_EXT = 20;
 USB_CABLE_R1 = 2.45;
 USB_CABLE_R2 = 1.5;
 
-BASE_WIDTH = 40;
+BASE_WIDTH = 46;
 $fn=128;
 
 difference() {
@@ -36,20 +36,34 @@ difference() {
       , back_extension_under = BASE_BACK_UNDER
       , back_plate_height = BASE_PLATE_HEIGHT
       , back_plate_sink = BASE_PLATE_SINK
-      , back_height_under = 13
+      , back_height_under = CLIP_HEIGHT + BASE_PLATE_SINK + BASE_PLATE_HEIGHT + FLIP_FRONT_HEIGHT
       , r = BASE_EDGE_RADIUS
     );
+    r = BASE_EDGE_RADIUS;
+    side_front_ext = BASE_ROTATE_RADIUS * 0.6;
+    side_ext_depth = BASE_BACK_UNDER + side_front_ext;
     translate([
-        BASE_ROTATE_RADIUS * 0.6, 
+        side_front_ext,
         -CLIP_HEIGHT- BASE_PLATE_SINK - BASE_PLATE_HEIGHT - FLIP_FRONT_HEIGHT, 
         0
     ])
       mirror([1, 0, 0])
-        cube([
-            BASE_BACK_UNDER + BASE_ROTATE_RADIUS * 0.6, 
-            CLIP_HEIGHT, 
-            BASE_WIDTH / 2 + CLIP_WIDTH
-        ]);
+        hull() {
+          translate([r, r, 0])
+            cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
+          translate([r, CLIP_HEIGHT - r, 0])
+            cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
+          translate([side_ext_depth - r, CLIP_HEIGHT - r, 0])
+            cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
+          translate([side_ext_depth - r, r, 0])
+            cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
+        }
+    // emboss to support cable
+    translate([0, -6, 0]) mirror([0, 1, 0])
+    minkowski() {
+      cube([1.6 * USB_DEPTH, USB_HEIGHT - 4.5, 0.6 * BASE_WIDTH / 2 - 1]);
+      cylinder(r=r, h=1);
+    }
   }
   translate([BASE_ROTATE_RADIUS - FLIP_EDGE_EXT, -FLIP_EDGE_HEIGHT, -5])
     cube([FLIP_EDGE_EXT + 5, FLIP_EDGE_HEIGHT, BASE_WIDTH + 10]);
