@@ -3,7 +3,7 @@ use <comp/anchor.scad>
 
 BASE_FRONT_EXT = 10 - 2;
 BASE_BACK_EXT = 15;
-BASE_HEIGHT_ABOVE_SURFACE = 1.4;
+BASE_HEIGHT_ABOVE_SURFACE = 0;
 
 FLIP_EDGE_HEIGHT = 1.9;
 FLIP_EDGE_EXT = 2.6;
@@ -27,9 +27,11 @@ difference() {
       , back_height_under = CLIP_HEIGHT + BASE_PLATE_SINK + BASE_PLATE_HEIGHT + FLIP_FRONT_HEIGHT
       , r = BASE_EDGE_RADIUS
     );
-    r = min(BASE_EDGE_RADIUS, BASE_HEIGHT_ABOVE_SURFACE / 2 - 0.01);
+    r = BASE_EDGE_RADIUS;
+    side_front_ext = BASE_ROTATE_RADIUS * 0.6;
+    side_ext_depth = BASE_BACK_UNDER + side_front_ext;
     translate([
-        BASE_ROTATE_RADIUS * 0.6,
+        side_front_ext,
         -CLIP_HEIGHT- BASE_PLATE_SINK - BASE_PLATE_HEIGHT - FLIP_FRONT_HEIGHT, 
         0
     ])
@@ -39,9 +41,9 @@ difference() {
             cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
           translate([r, CLIP_HEIGHT - r, 0])
             cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
-          translate([BASE_BACK_UNDER + BASE_ROTATE_RADIUS * 0.6 - r, CLIP_HEIGHT - r, 0])
+          translate([side_ext_depth - r, CLIP_HEIGHT - r, 0])
             cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
-          translate([BASE_BACK_UNDER + BASE_ROTATE_RADIUS * 0.6 - r, r, 0])
+          translate([side_ext_depth - r, r, 0])
             cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
         }
   }
