@@ -52,7 +52,7 @@ difference() {
   // laptop corner, cable support, and tunnel
   rotate([180 + extra_deg, -90, 0])
     //translate([30, 0, 0])
-    translate([15, 35, 37]) {
+    translate([15, 35, 37]) union() {
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
