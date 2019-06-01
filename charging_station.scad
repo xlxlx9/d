@@ -53,13 +53,6 @@ difference() {
   }
   translate([BASE_ROTATE_RADIUS - FLIP_EDGE_EXT, -FLIP_EDGE_HEIGHT, -5])
     cube([FLIP_EDGE_EXT + 5, FLIP_EDGE_HEIGHT, BASE_WIDTH + 10]);
-  translate([
-      0, 
-      -CLIP_HEIGHT- BASE_PLATE_SINK - BASE_PLATE_HEIGHT - FLIP_FRONT_HEIGHT - BASE_ROTATE_RADIUS,
-      0
-  ])
-*  translate([-BASE_BACK_UNDER - 5, 0, -5])
-    cube([BASE_BACK_UNDER + BASE_ROTATE_RADIUS + 10, BASE_ROTATE_RADIUS, BASE_WIDTH + 10]);
   translate([4, BASE_HEIGHT_ABOVE_SURFACE - USB_HEIGHT, 7]) rotate([-90, 90, 0]) union() {
     linear_extrude(height=USB_HEIGHT + USB_TOP_EXT) {
       r = min(USB_WIDTH / 2, USB_DEPTH / 2, USB_R);
