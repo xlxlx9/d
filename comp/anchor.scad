@@ -7,18 +7,26 @@ module anchor(
     back_extension_under=12,
     back_plate_sink=2,
     back_plate_height=2.2,
+    back_plate_depth=50,
+    back_height_under=10,
     r=3) {
   linear_extrude(height=width) 
   difference() {
     union() {
       // 1/4 pie
       r = min(height_above_surface / 2 - 0.01, r);
-      difference() {
+*      difference() {
         circle(r=rotate_radius);
         translate([-1.5 * rotate_radius, 0.1 * rotate_radius]) 
           square(3 * rotate_radius, 1.5 * rotate_radius);
         translate([-1.6 * rotate_radius, -1.1 * rotate_radius]) 
           square(1.5 * rotate_radius, 1.5 * rotate_radius);
+      }
+     intersection() {
+        translate([-back_plate_depth, 0])
+          circle(back_plate_depth + rotate_radius);
+        translate([-2, 2]) mirror([0, 1, 0])
+        square([rotate_radius + 2, back_height_under + 2]);
       }
       // top
       translate([r - back_extension_depth, r])
@@ -41,15 +49,15 @@ module anchor(
             square([back_extension_depth + 2 * r, rotate_radius + 4 * r]);
         }
       // back bottom,  domanated by back_extension_under
-      translate([r - back_extension_under, r - rotate_radius])
+      translate([r - back_extension_under, r - back_height_under])
         difference() {
           offset(r=r) {
-            square([back_extension_under * 1.25 - 0 * r, rotate_radius + r]);
+            square([back_extension_under * 1.25 - 0 * r, back_height_under + r]);
           }
-          translate([- 2 * r - 0.125 * back_extension_under, rotate_radius - r - back_plate_sink - back_plate_height / 2]) 
-            square([back_extension_under * 1.5 + 4 * r, 2 * r + rotate_radius]);
+          translate([- 2 * r - 0.125 * back_extension_under, back_height_under - r - back_plate_sink - back_plate_height / 2]) 
+            square([back_extension_under * 1.5 + 4 * r, 2 * r + back_height_under]);
           translate([-r + back_extension_under, -r * 1.5]) 
-            square([back_extension_under + 2 * r, rotate_radius + 4 * r]);
+            square([back_extension_under + 2 * r, back_height_under + 4 * r]);
         }
     }
     // plate insert
@@ -59,6 +67,7 @@ module anchor(
   }
 }
 
-translate([-50, 0, 0]) anchor(height_above_surface=2, r=1, back_extension_depth=2);
-anchor(height_above_surface=8, r=2, back_extension_under=7);
-translate([50, 0, 0]) anchor(height_above_surface=25, r=4, rotate_radius=13, back_extension_under=15, back_extension_depth=15);
+translate([-50, 0, 0]) anchor(height_above_surface=2, r=1, back_extension_depth=2, $fn=120);
+anchor(height_above_surface=8, r=2, back_extension_under=7, back_height_under= 7, $fn=120);
+translate([50, 0, 0]) anchor(height_above_surface=25, r=4, rotate_radius=13, back_extension_under=15, back_extension_depth=15, $fn=120);
+
