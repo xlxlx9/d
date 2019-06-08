@@ -17,8 +17,8 @@ HW_R = 6;
 HW_DIST = 4;
 FINGER_R = 9;
 
-BASE_FRONT_EXT = 45.2;
-BASE_BACK_EXT = 7.8;
+BASE_FRONT_EXT = 29.8;
+BASE_BACK_EXT = 15;
 
 intersection() {
 
@@ -37,24 +37,24 @@ difference() {
       , r = BASE_EDGE_RADIUS
     );
 
-    // Use cloud shape as closure
+    // Use umbrella as closure
     difference() { 
-*      translate([15, -BASE_BUMP_HEIGHT, 0])
-        rotate([0, 0, 0]) {
-          translate([105, -35.2 - 2.2 + 1.5458, 0])
-          mirror([1, 0, 0])
-          linear_extrude(height=BASE_WIDTH)
-            scale(1.1)
-            import("assets/thup.dxf");
-        }
-      translate([26, -4, 0])
+      translate([9.8, 6, 0]) rotate([0, 0, -20])
       linear_extrude(height=BASE_WIDTH) {
-        r0 = 54;
+        r0 = 61;
+        rh = 3.5;
+        r1 = 17.71;
+        hull() {
+          translate([0, r0 + rh]) circle(rh);
+          translate([0, -rh * 4]) circle(rh);
+        }
+        // extra support
+        *translate([r1 * 2 - 4.5, 0, 0]) square([rh, 10]);
+
         offset(r=2) difference() {
           circle(r0, $fn=200);
-          r1 = 14.63;
           for(t = [-1.5:1:1.5]) {
-            translate([t * r1 * 1.8, 0, 0]) circle(r1);
+            translate([t * r1 * 1.8, (1.5 - abs(t)) * -2, 0]) circle(r1);
           }
           translate([0, -1.5 * r0, 0])
               square([3 * r0, 3 * r0], center=true);
@@ -63,6 +63,10 @@ difference() {
       // do not intrude plate insert
       translate([-30, -BASE_PLATE_SINK - BASE_ROTATE_RADIUS, -BASE_WIDTH * 3]) 
         cube([30, BASE_ROTATE_RADIUS, 6 * BASE_WIDTH]);
+    }
+    hull() {
+      translate([BASE_ROTATE_RADIUS + BASE_BUMP_DEPTH + BASE_BUMP_HEIGHT, 0, 0]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
+      translate([BASE_ROTATE_RADIUS + BASE_BUMP_DEPTH + BASE_BUMP_HEIGHT + 15, 0, 0]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
     }
   }
   // laptop corner, cable support, and tunnel
@@ -92,7 +96,7 @@ difference() {
         , usbc_extend_top=6
         , tunnel_1=[]
         , tunnel_2=[]
-        //, delicate=true // cause lag in preview, switch before Render
+        , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
       // oberserving cables
       translate([0, (USBC_2_DY + USBC_1_DY) / 2, HW_R]) rotate([0, 90, 0])
@@ -122,10 +126,10 @@ difference() {
             mirror([0, 1, 0]) square([65, 11.5]);
         }
       // push by finger
-      translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
+      *translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
         mirror([0, 0, 1])
           cylinder(r=FINGER_R, h=USBC_1_HEIGHT + 18);
-        translate([0, -2, -4.32 + 5]) rotate([0, 90, 0])
+        translate([0, -2, -4.32 + 5 + 9]) rotate([0, 90, 0])
           cylinder(r=30, h=FINGER_R * 2 + 5, center=true);
       }
     }
