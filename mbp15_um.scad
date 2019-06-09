@@ -5,7 +5,7 @@ use <laptop.scad>;
 include <consts.scad>;
 include <variants/model_15in.scad>;
 //include <variants/um3.scad>
-include <variants/cr10.scad>
+include <variants/cr10vert15in.scad>
 //include <variants/cr10_fc.scad>
 //include <variants/power_cable_only.scad>
 
