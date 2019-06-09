@@ -12,9 +12,11 @@ FLIP_FRONT_HEIGHT = 1.9;
 CLIP_HEIGHT = 3;
 CLIP_WIDTH = BASE_WIDTH / 4;
 
-USB_WIDTH = 7.7;
-USB_DEPTH = 5.1;
-USB_HEIGHT = 11.9;
+BASE_PLATE_HEIGHT = 2.12;
+
+USB_WIDTH = 7.78;
+USB_DEPTH = 5.18;
+USB_HEIGHT = 11.98;
 USB_R = 3;
 USB_TOP_EXT = 5;
 USB_PADDING = 0;
@@ -59,7 +61,7 @@ difference() {
             cylinder(r=r, h=BASE_WIDTH / 2 + CLIP_WIDTH);
         }
     // emboss to support cable
-    translate([2, -6, 0]) mirror([0, 1, 0])
+    translate([1, -6, 0]) mirror([0, 1, 0])
     minkowski() {
       cube([1.4 * USB_DEPTH, USB_HEIGHT - 4.5, 0.6 * BASE_WIDTH / 2 - 1]);
       cylinder(r=r, h=1);
@@ -67,8 +69,8 @@ difference() {
   }
   translate([BASE_ROTATE_RADIUS - FLIP_EDGE_EXT, -FLIP_EDGE_HEIGHT, -5])
     cube([FLIP_EDGE_EXT + 5, FLIP_EDGE_HEIGHT, BASE_WIDTH + 10]);
-  translate([6, BASE_HEIGHT_ABOVE_SURFACE - USB_HEIGHT, 7]) rotate([-90, 90, 0]) union() {
-    //rotate([0, 0, 90]) // uncomment if you wanna a different direction
+  translate([5, BASE_HEIGHT_ABOVE_SURFACE - USB_HEIGHT, 7]) rotate([-90, 90, 0]) union() {
+    //rotate([0, 0, 111]) // uncomment if you wanna a different direction
     linear_extrude(height=USB_HEIGHT + USB_TOP_EXT) {
       r = min(USB_WIDTH / 2, USB_DEPTH / 2, USB_R);
       hull() {
