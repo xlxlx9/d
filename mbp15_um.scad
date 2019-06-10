@@ -18,7 +18,7 @@ HW_DIST = 4;
 FINGER_R = 9;
 
 BASE_FRONT_EXT = 29.8;
-BASE_BACK_EXT = 15;
+BASE_BACK_EXT = 21;
 
 intersection() {
 
@@ -64,9 +64,26 @@ difference() {
       translate([-30, -BASE_PLATE_SINK - BASE_ROTATE_RADIUS, -BASE_WIDTH * 3]) 
         cube([30, BASE_ROTATE_RADIUS, 6 * BASE_WIDTH]);
     }
+    // thickening
     hull() {
-      translate([BASE_ROTATE_RADIUS + BASE_BUMP_DEPTH + BASE_BUMP_HEIGHT, 0, 0]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
-      translate([BASE_ROTATE_RADIUS + BASE_BUMP_DEPTH + BASE_BUMP_HEIGHT + 15, 0, 0]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
+      translate([
+          BASE_ROTATE_RADIUS + BASE_BUMP_DEPTH + BASE_BUMP_HEIGHT
+          , 0, 0]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
+      translate([BASE_ROTATE_RADIUS + BASE_BUMP_DEPTH + BASE_BUMP_HEIGHT + 15
+          , 0, 0]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
+    }
+    hull() {
+      translate([
+          BASE_BUMP_HEIGHT - BASE_BACK_EXT
+          , BASE_BUMP_HEIGHT / 2 , 0 ]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
+      translate([
+          BASE_BUMP_HEIGHT - BASE_BACK_EXT
+          , BASE_BUMP_HEIGHT / 3 + BASE_HEIGHT_ABOVE_SURFACE
+          , 0 ]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
+      translate([
+          BASE_ROTATE_RADIUS + BASE_BUMP_HEIGHT + BASE_FRONT_EXT - 1.8
+          , BASE_BUMP_HEIGHT / 3 + BASE_HEIGHT_ABOVE_SURFACE
+          , 0 ]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
     }
   }
   // laptop corner, cable support, and tunnel
@@ -91,8 +108,8 @@ difference() {
         , usbc_2_dy=USBC_2_DY
         , usbc_2_dx=USBC_2_DX
         , usbc_tunnel_xy_padding=USBC_TUNNEL_XY_PADDING
-        , usbc_1_tunnel_extend_bottom=10
-        , usbc_2_tunnel_extend_bottom=10
+        , usbc_1_tunnel_extend_bottom=50
+        , usbc_2_tunnel_extend_bottom=6.5
         , usbc_extend_top=6
         , tunnel_1=[]
         , tunnel_2=[]
@@ -123,7 +140,7 @@ difference() {
             }
           }
           rotate([0, 0, 90 - extra_deg]) translate([-1, -11 + 0.7])
-            mirror([0, 1, 0]) square([65, 11.5]);
+            mirror([0, 1, 0]) square([65, 17.5]);
         }
       // push by finger
       *translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
