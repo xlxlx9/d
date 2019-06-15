@@ -40,24 +40,50 @@ difference() {
     // Use umbrella as closure
     difference() { 
       translate([9.8, 6, 0]) rotate([0, 0, -20])
-      linear_extrude(height=BASE_WIDTH) {
-        r0 = 61;
-        rh = 3.5;
-        r1 = 17.71;
-        hull() {
-          translate([0, r0 + rh]) circle(rh);
-          translate([0, -rh * 4]) circle(rh);
-        }
-        // extra support
-        *translate([r1 * 2 - 4.5, 0, 0]) square([rh, 10]);
-
-        offset(r=2) difference() {
-          circle(r0, $fn=200);
-          for(t = [-1.5:1:1.5]) {
-            translate([t * r1 * 1.8, (1.5 - abs(t)) * -2, 0]) circle(r1);
+      difference() {
+        linear_extrude(height=BASE_WIDTH) {
+          r0 = 61;
+          r1 = 17.71;
+          rh = 3.5;
+          hull() {
+            translate([0, r0 + rh]) circle(rh);
+            translate([0, -rh * 4]) circle(rh);
           }
-          translate([0, -1.5 * r0, 0])
-              square([3 * r0, 3 * r0], center=true);
+          // extra support
+          *translate([r1 * 2 - 4.5, 0, 0]) square([rh, 10]);
+
+          offset(r=2) difference() {
+            circle(r0, $fn=200);
+            for(t = [-1.5:1:1.5]) {
+              translate([t * r1 * 1.8, (1.5 - abs(t)) * -2, 0]) circle(r1);
+            }
+            translate([0, -1.5 * r0, 0])
+                square([3 * r0, 3 * r0], center=true);
+          }
+        }
+        for (j=[0, 1]) {
+          translate([0, 0, j * (BASE_WIDTH - 2) + (j * 2 - 1) * 1.2]) linear_extrude(height=2) {
+            r0 = 59;
+            r1 = 78;
+            d1 = 43;
+            r2 = 16;
+            for(t = [0:1]) {
+              mirror([t, 0, 0]) {
+                offset(r=2) offset(r=-2) 
+                  difference() {
+                    circle(r0);
+                    translate([d1, 0]) circle(r1);
+                    translate([-1.5 * 2 * r2, 0]) circle(r2 + 5);
+                  }
+                offset(r=2) offset(r=-2) 
+                  difference() {
+                    translate([d1 + 7, 0]) circle(r1);
+                    translate([-3.5, -200]) square([200, 400]);
+                    translate([-0.5 * 2 * r2, 0]) circle(r2 + 3);
+                  }
+              }
+            }
+          }
         }
       }
       // do not intrude plate insert
@@ -126,7 +152,7 @@ difference() {
         linear_extrude(height=USBC_WIDTH + USBC_TUNNEL_XY_PADDING * 2, center=true) union() {
           union() {
             difference() {
-              circle(31.9);
+              circle(30);
               hull() {
                 translate([-0.7, 0, 0])
                   circle(10);
@@ -140,7 +166,7 @@ difference() {
             }
           }
           rotate([0, 0, 90 - extra_deg]) translate([-1, -11 + 0.7])
-            mirror([0, 1, 0]) square([65, 17.5]);
+            mirror([0, 1, 0]) square([65, 19.7]);
         }
       // push by finger
       *translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
