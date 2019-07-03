@@ -6,6 +6,8 @@ include <consts.scad>;
 include <variants/model_15in.scad>;
 //include <variants/um3.scad>
 include <variants/cr10.scad>
+// comment if print without rotating
+include <variants/cr10vert15in.scad>
 //include <variants/cr10_fc.scad>
 //include <variants/power_cable_only.scad>
 
@@ -84,7 +86,7 @@ difference() {
 //          , [0, 0, 0], [0, 0, -9],  [0, 2, -20], [0, 18, -47]
 //          , [0, 0, 0], [0, 0, -7],  [0, 0, -20], [0, 11, -51]
         ]
-//        , delicate=true // cause lag in preview, switch before Render
+        , delicate=true // cause lag in preview, switch before Render
         , fn=$fn);
       // oberserving cables
       translate([0, (USBC_2_DY + USBC_1_DY) / 2, HW_R]) rotate([0, 90, 0])
@@ -120,7 +122,7 @@ difference() {
 *    rotate([0, 0, extra_deg])
       cube([40, 70, 2 * BASE_WIDTH], center=true);
 *    rotate([0, 0, extra_deg])
-      translate([65, 0, BASE_WIDTH / 2])
+      translate([68, 0, BASE_WIDTH / 2])
       cube([30, 150, 2 * BASE_WIDTH], center=true);
 }
 
