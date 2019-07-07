@@ -114,7 +114,7 @@ difference() {
 *    rotate([0, 0, extra_deg])
       cube([40, 70, 2 * BASE_WIDTH], center=true);
 *    rotate([0, 0, extra_deg])
-      translate([65, 0, BASE_WIDTH / 2])
+      translate([68, 0, BASE_WIDTH / 2])
       cube([30, 150, 2 * BASE_WIDTH], center=true);
 }
 
