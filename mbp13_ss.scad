@@ -13,6 +13,7 @@ extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
 HW_R = 6;
 HW_DIST = 4;
 FINGER_R = 9;
+CLIP_BACK_HEIGHT_UNDER = 10;
 
 intersection() {
 
@@ -25,10 +26,14 @@ difference() {
       , front_extension_depth = BASE_FRONT_EXT
       , back_extension_depth = BASE_BACK_EXT
       , back_extension_under = BASE_BACK_UNDER
+      , back_height_under = CLIP_BACK_HEIGHT_UNDER
       , back_plate_height = BASE_PLATE_HEIGHT
       , back_plate_sink = BASE_PLATE_SINK
       , r = BASE_EDGE_RADIUS
     );
+    br = (CLIP_BACK_HEIGHT_UNDER- BASE_PLATE_SINK - BASE_PLATE_HEIGHT) / 2;
+    translate([-14.5, -7.07, 0])
+      cylinder(r=br, h=BASE_WIDTH);
 
     // Use cloud shape as closure
     difference() { 
@@ -67,8 +72,8 @@ difference() {
         , usbc_2_dy=USBC_2_DY
         , usbc_2_dx=USBC_2_DX
         , usbc_tunnel_xy_padding=USBC_TUNNEL_XY_PADDING
-        , usbc_1_tunnel_extend_bottom=32
-        , usbc_2_tunnel_extend_bottom=50
+        , usbc_1_tunnel_extend_bottom=25
+        , usbc_2_tunnel_extend_bottom=25
         , usbc_extend_top=6
         , tunnel_1=[]
         , tunnel_2=[]
@@ -81,32 +86,35 @@ difference() {
         translate([0,  HW_DIST, 0]) cylinder(h=2 * BASE_WIDTH, r=HW_R, center=false);
       }
       // widen tunnel
-      translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -44])
-        linear_extrude(height=24) {
-          offset(r=USBC_TUNNEL_XY_PADDING) {
-            square([USBC_WIDTH, USBC_DEPTH * 5], center=true);
+      translate([USBC_1_DX, -20.2, -32]) rotate([0, 90, 0]) 
+        linear_extrude(height=USBC_WIDTH + USBC_TUNNEL_XY_PADDING * 2, center=true) union() {
+          union() {
+            difference() {
+              circle(25);
+              hull() {
+                translate([-0.7, 0, 0])
+                  circle(10);
+                translate([0.7, 0, 0])
+                  circle(10);
+              }
+              rotate([0, 0, -extra_deg]) translate([-100, 0])
+                square([200, 200]);
+              mirror([1, 0, 0]) translate([0, -100])
+                square([200, 200]);
+            }
           }
-        }
-      translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2 + USBC_DEPTH * 1.75, -44 - 20])
-        linear_extrude(height=24) {
-          offset(r=USBC_TUNNEL_XY_PADDING) {
-            square([USBC_WIDTH, USBC_DEPTH * 1.5], center=true);
-          }
+          rotate([0, 0, 90 - extra_deg]) translate([-1, -11 + 0.7])
+            mirror([0, 1, 0]) square([65, 14.7]);
         }
       // push by finger
       translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
+        translate([0, 0, -2])
         mirror([0, 0, 1])
           cylinder(r=FINGER_R, h=USBC_1_HEIGHT + 18);
         translate([0, -2, -4.32 + 5]) rotate([0, 90, 0])
           cylinder(r=30, h=FINGER_R * 2 + 5, center=true);
       }
     }
-  // widen tunnel
-  //translate([0, 0, 30])
-  *translate([0, 0, BASE_WIDTH / 2 - USBC_WIDTH / 2 - USBC_TUNNEL_XY_PADDING])
-    linear_extrude(height=USBC_WIDTH + 2 * USBC_TUNNEL_XY_PADDING) {
-      polygon([[-27, -16], [5, -20], [-4, 20]]);
-  }
   // make room for bump
   translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
     cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
