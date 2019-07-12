@@ -130,6 +130,7 @@ difference() {
         }
       // push by finger
       translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
+        translate([0, 0, -2])
         mirror([0, 0, 1])
           cylinder(r=FINGER_R, h=USBC_1_HEIGHT + 18);
         translate([0, -2, -4.32 + 5]) rotate([0, 90, 0])
