@@ -42,20 +42,21 @@ module shuffle_base(zh=4) {
   }
 }
 
+// charging cable
 mirror([0, 1, 0]) translate([40, 0, 0])
 difference() {
   union() {
     anchor(
         width=BASE_WIDTH / 2
-      , height_above_surface = BASE_HEIGHT_ABOVE_SURFACE
-      , rotate_radius = BASE_ROTATE_RADIUS
-      , front_extension_depth = BASE_FRONT_EXT - FLIP_EDGE_EXT
-      , back_extension_depth = BASE_BACK_EXT
-      , back_extension_under = BASE_BACK_UNDER
-      , back_plate_height = BASE_PLATE_HEIGHT
-      , back_plate_sink = BASE_PLATE_SINK
-      , back_height_under = CLIP_HEIGHT + BASE_PLATE_SINK + BASE_PLATE_HEIGHT + FLIP_FRONT_HEIGHT
-      , r = BASE_EDGE_RADIUS
+      , height_above_surface=BASE_HEIGHT_ABOVE_SURFACE
+      , rotate_radius=BASE_ROTATE_RADIUS
+      , front_extension_depth=BASE_FRONT_EXT - FLIP_EDGE_EXT
+      , back_extension_depth=BASE_BACK_EXT
+      , back_extension_under=BASE_BACK_UNDER
+      , back_plate_height=BASE_PLATE_HEIGHT
+      , back_plate_sink=BASE_PLATE_SINK
+      , back_height_under=CLIP_HEIGHT + BASE_PLATE_SINK + BASE_PLATE_HEIGHT + FLIP_FRONT_HEIGHT
+      , r=BASE_EDGE_RADIUS
     );
     r = BASE_EDGE_RADIUS;
     side_front_ext = BASE_ROTATE_RADIUS * 0.6;
@@ -101,20 +102,21 @@ difference() {
   }
 }
 
+// simply holders
 BASE_WIDTH_2 = 92;
 difference() {
   union() {
     anchor(
         width=BASE_WIDTH_2 / 2
-      , height_above_surface = BASE_HEIGHT_ABOVE_SURFACE
-      , rotate_radius = BASE_ROTATE_RADIUS
-      , front_extension_depth = BASE_FRONT_EXT - FLIP_EDGE_EXT
-      , back_extension_depth = BASE_BACK_EXT
-      , back_extension_under = BASE_BACK_UNDER
-      , back_plate_height = BASE_PLATE_HEIGHT
-      , back_plate_sink = BASE_PLATE_SINK
-      , back_height_under = CLIP_HEIGHT + BASE_PLATE_SINK + BASE_PLATE_HEIGHT + FLIP_FRONT_HEIGHT
-      , r = BASE_EDGE_RADIUS
+      , height_above_surface=BASE_HEIGHT_ABOVE_SURFACE
+      , rotate_radius=BASE_ROTATE_RADIUS
+      , front_extension_depth=BASE_FRONT_EXT - FLIP_EDGE_EXT
+      , back_extension_depth=BASE_BACK_EXT
+      , back_extension_under=BASE_BACK_UNDER
+      , back_plate_height=BASE_PLATE_HEIGHT
+      , back_plate_sink=BASE_PLATE_SINK
+      , back_height_under=CLIP_HEIGHT + BASE_PLATE_SINK + BASE_PLATE_HEIGHT + FLIP_FRONT_HEIGHT
+      , r=BASE_EDGE_RADIUS
     );
     r = BASE_EDGE_RADIUS;
     side_front_ext = BASE_ROTATE_RADIUS * 0.6;
