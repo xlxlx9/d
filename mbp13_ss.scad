@@ -13,7 +13,7 @@ extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
 HW_R = 6;
 HW_DIST = 4;
 FINGER_R = 9;
-CLIP_BACK_HEIGHT_UNDER = 10;
+CLIP_BACK_HEIGHT_UNDER = 15;
 
 intersection() {
 
@@ -32,7 +32,7 @@ difference() {
       , r = BASE_EDGE_RADIUS
     );
     br = (CLIP_BACK_HEIGHT_UNDER- BASE_PLATE_SINK - BASE_PLATE_HEIGHT) / 2;
-    translate([-14.5, -7.07, 0])
+    translate([-14.5, -7.07 - 2.5, 0])
       cylinder(r=br, h=BASE_WIDTH);
 
     // Use cloud shape as closure
