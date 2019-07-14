@@ -134,7 +134,7 @@ difference() {
         , usbc_2_dy=USBC_2_DY
         , usbc_2_dx=USBC_2_DX
         , usbc_tunnel_xy_padding=USBC_TUNNEL_XY_PADDING
-        , usbc_1_tunnel_extend_bottom=50
+        , usbc_1_tunnel_extend_bottom=8
         , usbc_2_tunnel_extend_bottom=6.5
         , usbc_extend_top=6
         , tunnel_1=[]
@@ -152,7 +152,7 @@ difference() {
         linear_extrude(height=USBC_WIDTH + USBC_TUNNEL_XY_PADDING * 2, center=true) union() {
           union() {
             difference() {
-              circle(30);
+              circle(30 - 4);
               hull() {
                 translate([-0.7, 0, 0])
                   circle(10);
@@ -166,7 +166,7 @@ difference() {
             }
           }
           rotate([0, 0, 90 - extra_deg]) translate([-1, -11 + 0.7])
-            mirror([0, 1, 0]) square([65, 19.7]);
+            mirror([0, 1, 0]) square([65, 19.7 - 4]);
         }
       // push by finger
       *translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
