@@ -18,7 +18,10 @@ HW_DIST = 4;
 FINGER_R = 9;
 
 BASE_FRONT_EXT = 29.8;
-BASE_BACK_EXT = 21;
+BASE_BACK_EXT = 10;
+BASE_BACK_UNDER = 10;
+
+USBC_CABLE_R = 4.5 / 2;
 
 intersection() {
 
@@ -112,6 +115,16 @@ difference() {
           , 0 ]) cylinder(h=BASE_WIDTH, r=BASE_BUMP_HEIGHT);
     }
   }
+
+  // cable side clip exposed
+  for (t=[0, BASE_WIDTH]) {
+  translate([2, 0, t]) rotate([90, 0, 0]) hull() {
+      translate([0, USBC_CABLE_R, 0])
+        cylinder(center=true, h=BASE_WIDTH, r=USBC_CABLE_R);
+      translate([0, -USBC_CABLE_R, 0])
+        cylinder(center=true, h=BASE_WIDTH, r=USBC_CABLE_R);
+    }
+  }
   // laptop corner, cable support, and tunnel
   translate([-6.38, 0, 0]) rotate([180 + extra_deg, -90, 0])
     //translate([30, 0, 0])
@@ -148,7 +161,7 @@ difference() {
         translate([0,  HW_DIST, 0]) cylinder(h=2 * BASE_WIDTH, r=HW_R, center=false);
       }
       // widen tunnel
-      translate([USBC_1_DX, -20, -22]) rotate([0, 90, 0]) 
+*      translate([USBC_1_DX, -20, -22]) rotate([0, 90, 0]) 
         linear_extrude(height=USBC_WIDTH + USBC_TUNNEL_XY_PADDING * 2, center=true) union() {
           union() {
             difference() {
@@ -190,5 +203,6 @@ difference() {
 // test cable reach
 *rotate([0, 0, extra_deg])
   cube([74, 60, 2 * BASE_WIDTH], center=true);
-*cube([56, 56, 2 * BASE_WIDTH], center=true);
+*translate([-9, 10, 0])
+  cube([56, 56, 2 * BASE_WIDTH], center=true);
 }
