@@ -24,7 +24,7 @@ USB_TUNNEL_BOTTOM_EXT = 20;
 USB_CABLE_R1 = 2.45;
 USB_CABLE_R2 = 1.5;
 
-BASE_WIDTH = 46;
+BASE_WIDTH = 24;
 $fn=128;
 
 difference() {
@@ -63,14 +63,14 @@ difference() {
     // emboss to support cable
     translate([1, -6, 0]) mirror([0, 1, 0])
     minkowski() {
-      cube([1.4 * USB_DEPTH, USB_HEIGHT - 4.5, 0.6 * BASE_WIDTH / 2 - 1]);
+      cube([1.4 * USB_DEPTH, USB_HEIGHT - 4.5, 0.8 * BASE_WIDTH / 2 - 1]);
       cylinder(r=r, h=1);
     }
   }
   translate([BASE_ROTATE_RADIUS - FLIP_EDGE_EXT, -FLIP_EDGE_HEIGHT, -5])
     cube([FLIP_EDGE_EXT + 5, FLIP_EDGE_HEIGHT, BASE_WIDTH + 10]);
-  translate([5, BASE_HEIGHT_ABOVE_SURFACE - USB_HEIGHT, 7]) rotate([-90, 90, 0]) union() {
-    //rotate([0, 0, 111]) // uncomment if you wanna a different direction
+  translate([5, BASE_HEIGHT_ABOVE_SURFACE - USB_HEIGHT, 5]) rotate([-90, 90, 0]) union() {
+    rotate([0, 0, 111]) // uncomment if you wanna a different direction
     linear_extrude(height=USB_HEIGHT + USB_TOP_EXT) {
       r = min(USB_WIDTH / 2, USB_DEPTH / 2, USB_R);
       hull() {
