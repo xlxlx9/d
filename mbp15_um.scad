@@ -6,6 +6,7 @@ include <consts.scad>;
 include <variants/model_15in.scad>;
 //include <variants/um3.scad>
 include <variants/cr10vert15in.scad>
+//include <variants/cr10_13in.scad>
 //include <variants/cr10_fc.scad>
 //include <variants/power_cable_only.scad>
 
@@ -166,7 +167,7 @@ difference() {
         , usbc_tunnel_xy_padding=USBC_TUNNEL_XY_PADDING
         , usbc_1_tunnel_extend_bottom=8
         , usbc_2_tunnel_extend_bottom=6.5
-        , usbc_extend_top=6
+        , usbc_extend_top=9
         , tunnel_1=[]
         , tunnel_2=[]
         , delicate=true // cause lag in preview, switch before Render
