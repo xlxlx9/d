@@ -4,7 +4,7 @@ use <laptop.scad>;
 
 include <consts.scad>;
 include <variants/cr10_13in.scad>;
-include <variants/power_cable_only.scad>
+//include <variants/power_cable_only.scad>
 
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
