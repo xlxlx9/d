@@ -37,7 +37,7 @@ difference() {
     );
 
     // Use cloud shape as closure
-    difference() { 
+    difference() {
       translate([15, -BASE_BUMP_HEIGHT, 0])
         rotate([0, 0, 0]) cloud_xy(
             thickness=BASE_WIDTH
@@ -47,7 +47,7 @@ difference() {
           , r4=18
         );
       // do not intrude plate insert
-      translate([-30, -BASE_PLATE_SINK - BASE_ROTATE_RADIUS, -BASE_WIDTH * 3]) 
+      translate([-30, -BASE_PLATE_SINK - BASE_ROTATE_RADIUS, -BASE_WIDTH * 3])
         cube([30, BASE_ROTATE_RADIUS, 6 * BASE_WIDTH]);
     }
   }
@@ -108,7 +108,7 @@ difference() {
           }
         }
       // widen tunnel
-      translate([USBC_1_DX, -20, -27]) rotate([0, 90, 0]) 
+      translate([USBC_1_DX, -20, -27]) rotate([0, 90, 0])
         linear_extrude(height=USBC_WIDTH + USBC_TUNNEL_XY_PADDING * 2, center=true) union() {
           union() {
             difference() {
@@ -130,7 +130,7 @@ difference() {
         }
       // push by finger
       translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
-        translate([0, 0, -2])
+        translate([0, 0, -6])
         mirror([0, 0, 1])
           cylinder(r=FINGER_R, h=USBC_1_HEIGHT + 18);
         translate([0, -2, -4.32 + 5]) rotate([0, 90, 0])
@@ -149,8 +149,8 @@ difference() {
 }
 
 // test case fit
- translate([35, 42, 0])
-cube([114, 60, 2 * BASE_WIDTH], center=true);
+*translate([35, 42, 0])
+  cube([114, 60, 2 * BASE_WIDTH], center=true);
 
 // test cable reach
 *rotate([0, 0, extra_deg])

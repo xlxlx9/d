@@ -11,7 +11,6 @@ module usbc_x(
   , tunnel_xy_padding=1
   ) {
   xyr = min(xyr, depth / 2, width / 2);
-  echo(xyr);
   rotate([0, 0, 90])
   union() {
     linear_extrude(height=height + extend_top) {
