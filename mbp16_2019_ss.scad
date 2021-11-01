@@ -1,5 +1,6 @@
 use <comp/anchor.scad>;
 use <comp/cloud.scad>;
+use <comp/prezel.scad>;
 use <laptop.scad>;
 
 include <consts.scad>;
@@ -51,6 +52,14 @@ difference() {
         cube([30, BASE_ROTATE_RADIUS, 6 * BASE_WIDTH]);
     }
   }
+  // Meta logo ingraving
+  translate([30, 30, -1]) linear_extrude(height=3)
+    scale(0.4) {
+      translate([-4.25, 0, 0])
+        hollow(w=8);
+      translate([4.25, 0, 0]) mirror([-1, 0, 0])
+        hollow(w=8);
+    }
   // laptop corner, cable support, and tunnel
   rotate([180 + extra_deg, -90, 0])
     //translate([30, 0, 0])
