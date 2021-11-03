@@ -4,6 +4,8 @@
 // Bed 60 centigrade
 // Extruder 190 centigrade
 
+BASE_PLATE_HEIGHT = 2.2;
+
 USBC_WIDTH=
   10.3 /*r1, r2*/ + 0.2 /*r3*/ - 0.15 /*r4*/ + 0.08 /*r5*/ + 0.08 /*r6*/ - 0.03 /*r7*/ + 0.016
   + 0.1 // compensate for squeezing from 90% fill

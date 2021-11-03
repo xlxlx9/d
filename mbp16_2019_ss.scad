@@ -1,6 +1,6 @@
 use <comp/anchor.scad>;
 use <comp/cloud.scad>;
-use <comp/prezel.scad>;
+//use <comp/prezel.scad>;
 use <laptop.scad>;
 
 include <consts.scad>;
@@ -53,7 +53,7 @@ difference() {
     }
   }
   // Meta logo ingraving
-  translate([30, 30, -1]) linear_extrude(height=3)
+*  translate([30, 30, -1]) linear_extrude(height=3)
     scale(0.4) {
       translate([-4.25, 0, 0])
         hollow(w=8);
@@ -139,7 +139,7 @@ difference() {
         }
       // push by finger
       translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
-        translate([0, 0, -6])
+        translate([0, 0, -2])
         mirror([0, 0, 1])
           cylinder(r=FINGER_R, h=USBC_1_HEIGHT + 18);
         translate([0, -2, -4.32 + 5]) rotate([0, 90, 0])
@@ -165,4 +165,7 @@ difference() {
 *rotate([0, 0, extra_deg])
   cube([74, 60, 2 * BASE_WIDTH], center=true);
 *cube([56, 56, 2 * BASE_WIDTH], center=true);
+
+// test clip on back plate
+*translate([-40, -45, 0]) cube([50, 50, 50]);
 }
