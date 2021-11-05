@@ -32,6 +32,7 @@ USBC_1_DY=-33.175;
 USBC_1_DX=-0.2;
 USBC_2_DY=-48.175;
 USBC_2_DX=-0.2;
+USBC_1_XYR = 3;
 USBC_TUNNEL_XY_PADDING=0.4;
 
 // pad sliding track

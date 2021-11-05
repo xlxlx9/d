@@ -9,6 +9,7 @@ include <variants/model_16in_2019.scad>;
 //include <variants/cr10.scad>
 // comment if print without rotating
 include <variants/prusa_mk3_16in.scad>
+include <variants/thinkvision_usbc.scad>
 //include <variants/cr10_fc.scad>
 //include <variants/power_cable_only.scad>
 
@@ -69,10 +70,11 @@ difference() {
         , edge_front=CASE_EDGE_FRONT
         , edge_back=CASE_EDGE_BACK
         , corner_radius=CASE_CORNER_R
-        , usbc_1_width=USBC_WIDTH
-        , usbc_1_depth=USBC_DEPTH
-        , usbc_2_width=USBC_WIDTH
-        , usbc_2_depth=USBC_DEPTH
+        , usbc_1_width=USBC_WIDTH_1
+        , usbc_1_depth=USBC_DEPTH_1
+        , usbc_2_width=USBC_WIDTH_2
+        , usbc_2_depth=USBC_DEPTH_2
+        , usbc_1_xyr=USBC_1_XYR
         , usbc_1_height=USBC_1_HEIGHT
         , usbc_2_height=USBC_2_HEIGHT
         , usbc_1_dy=USBC_1_DY

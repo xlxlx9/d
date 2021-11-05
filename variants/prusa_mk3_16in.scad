@@ -6,18 +6,21 @@
 
 BASE_PLATE_HEIGHT = 2.2;
 
-USBC_WIDTH=
+USBC_WIDTH_1 =
   10.3 /*r1, r2*/ + 0.2 /*r3*/ - 0.15 /*r4*/ + 0.08 /*r5*/ + 0.08 /*r6*/ - 0.03 /*r7*/ + 0.016
   + 0.1 // compensate for squeezing from 90% fill
   - 0.15 // after 16in v1
   - 0.15 // after 16in v2
   ;
-USBC_DEPTH=
+USBC_WIDTH_2 = USBC_WIDTH_1;
+
+USBC_DEPTH_1 =
   6 /*r1, r2*/ + 0.2 /*r3*/ - 0.15 /*r5*/ + 0.15 /*r6*/ - 0.03 /*r7*/ + 0.016
   + 0.1 // compensate for squeezing from 90% fill
   - 0.15 // after 16in v1
   - 0.15 // after 16in v2
   ;
+USBC_DEPTH_2 = USBC_DEPTH_1;
 
 USBC_1_DY=-33.175 /*r1*/ - 0.25 /*r5*/ - 0.2
   //+ 0.15 // after 16in v1 // wrong direction
