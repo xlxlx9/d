@@ -20,14 +20,14 @@ BASE_FRONT_EXT = 10;
 //BASE_FRONT_EXT = 40;
 BASE_BACK_EXT = 8;
 //BASE_HEIGHT_ABOVE_SURFACE = 12;
-BASE_WIDTH = 30;
+BASE_WIDTH = 27;
 
 BACK_TO_FRONT = BASE_BACK_EXT + BASE_ROTATE_RADIUS + BASE_FRONT_EXT;
 
 // hollow for cable observing
 HW_R = 6;
 HW_DIST = 4;
-FINGER_R = 9;
+FINGER_R = 8;
 
 intersection() {
 
@@ -117,8 +117,8 @@ difference() {
           }
         }
       // widen tunnel
-      translate([USBC_1_DX, -20, -27]) rotate([0, 90, 0])
-        linear_extrude(height=USBC_WIDTH + USBC_TUNNEL_XY_PADDING * 2, center=true) union() {
+      translate([USBC_1_DX, -20, -31]) rotate([0, 90, 0])
+        linear_extrude(height=USBC_WIDTH_1 + USBC_TUNNEL_XY_PADDING * 2, center=true) union() {
           union() {
             difference() {
               circle(32);
@@ -139,7 +139,7 @@ difference() {
         }
       // push by finger
       translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
-        translate([0, 0, -6])
+        translate([0, -1.5 - (USBC_1_DY - USBC_2_DY) / 2 , -6])
         mirror([0, 0, 1])
           cylinder(r=FINGER_R, h=USBC_1_HEIGHT + 18);
         translate([0, -2, -4.32 + 5]) rotate([0, 90, 0])
