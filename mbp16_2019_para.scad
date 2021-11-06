@@ -60,7 +60,11 @@ difference() {
     }
   }
   // laptop corner, cable support, and tunnel
-  translate([-8, -8, -25 + 18]) mirror([0, 0, 1]) rotate([180 + extra_deg, 0, 0])
+#  translate([-8, -8, -25 + 18])
+    translate([30.5, 0, 0])
+    mirror([1, 0, 0])
+    mirror([0, 0, 1])
+    rotate([180 + extra_deg, 0, 0])
     //translate([30, 0, 0])
     translate([15, 35, 37]) union() {
       case_ss(
