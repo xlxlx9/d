@@ -61,6 +61,7 @@ difference() {
         , usbc_extend_top=35
         , ptt2=PAD_TH2
         , pdy=PAD_DY
+        , pdz=PAD_DZ
         , tunnel_1=[
 //            [0, 0, 0], [0, 0, -10], [0, 4, -20], [0, 20, -47]
         ]

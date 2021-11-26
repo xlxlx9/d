@@ -20,6 +20,7 @@ module case_mba11(
   , pth3 = 22
   , psink = 0.6
   , pdy = -6
+  , pdz = 17
   , usbc_1_width=10.3
   , usbc_1_depth=6
   , usbc_1_height=7
@@ -62,6 +63,7 @@ module case_mba11(
         , pth3=pth3
         , psink=psink
         , pdy=pdy
+        , pdz=pdz
         , delicate=delicate
         , fn=fn
       );
@@ -82,6 +84,7 @@ module case_mba11(
         , pth3=pth3
         , psink=psink
         , pdy=pdy
+        , pdz=pdz
         , delicate=delicate
         , fn=fn
       );
