@@ -45,9 +45,9 @@ difference() {
         , corner_radius=CASE_CORNER_R
         , usbc_1_width=USBC_1_WIDTH
         , usbc_1_depth=USBC_1_DEPTH
+        , usbc_1_height=USBC_1_HEIGHT
         , usbc_2_width=USBC_2_WIDTH
         , usbc_2_depth=USBC_2_DEPTH
-        , usbc_1_height=USBC_1_HEIGHT
         , usbc_2_height=USBC_2_HEIGHT
         , usbc_1_xyr=USBC_1_XYR
         , usbc_2_xyr=USBC_2_XYR
@@ -59,6 +59,7 @@ difference() {
         , usbc_1_tunnel_extend_bottom=28
         , usbc_2_tunnel_extend_bottom=36
         , usbc_extend_top=35
+        , pdy=PAD_DY
         , tunnel_1=[
 //            [0, 0, 0], [0, 0, -10], [0, 4, -20], [0, 20, -47]
         ]
@@ -95,8 +96,8 @@ difference() {
 }
 
 // test case fit
-*translate([35, 42, 0])
-  cube([114, 60, 2 * BASE_WIDTH], center=true);
+#translate([-15, 22, 0.475 * BASE_WIDTH])
+  cube([114, 60, 0.75 * BASE_WIDTH], center=true);
 
 // test cable reach
 *rotate([0, 0, extra_deg])
