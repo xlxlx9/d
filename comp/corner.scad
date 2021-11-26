@@ -1,16 +1,16 @@
 use <../lib/bezier.scad>;
 
 function outline2d(
-    thickness=14.5, 
-    height=30, 
-    edge_front=4.9, 
-    edge_back=3, 
+    thickness=14.5,
+    height=30,
+    edge_front=4.9,
+    edge_back=3,
     al = 1.05,
     bl = 0.75,
     ar = 0.95,
     br = 0.66,
     fn = $fn
-    ) = 
+    ) =
   let (
       p0l = [-thickness / 2, 0]
     , p1l = [-thickness / 2 * al, height * bl]
@@ -71,7 +71,7 @@ module corner(
   union() {
     linear_extrude(height=width)
       polygon(outline2d_ext(
-            ext=depth - height, 
+            ext=depth - height,
           , thickness=thickness
           , height=height
           , edge_front=edge_front
@@ -80,7 +80,7 @@ module corner(
           , bl=bl
           , ar=ar
           , br=br
-          , fn=fn 
+          , fn=fn
       ));
     translate([-thickness / 2 + psink, pdy, pdz])
       pad_track(height=width - pdz, ptt2=ptt2, pth3=pth3, fn=fn);
@@ -115,7 +115,7 @@ module corner_t(
           intersection() {
             linear_extrude(height=width)
               polygon(outline2d_ext(
-                    ext=depth - height, 
+                    ext=depth - height,
                   , thickness=thickness
                   , height=height
                   , edge_front=edge_front
@@ -124,13 +124,13 @@ module corner_t(
                   , bl=bl
                   , ar=ar
                   , br=br
-                  , fn=fn 
+                  , fn=fn
               ));
             translate([0, -depth + height, height])
             rotate([-90, 0, 0])
             linear_extrude(height=depth)
               polygon(outline2d_ext(
-                    ext=width- height, 
+                    ext=width- height,
                   , thickness=thickness
                   , height=height
                   , edge_front=edge_front
@@ -139,7 +139,7 @@ module corner_t(
                   , bl=bl
                   , ar=ar
                   , br=br
-                  , fn=fn 
+                  , fn=fn
               ));
           }
           if(delicate) {
@@ -159,8 +159,8 @@ module corner_t(
             , bl=bl
             , ar=ar
             , br=br
-            , fn=fn 
-          )) if(p[1] > height - corner_radius) 
+            , fn=fn
+          )) if(p[1] > height - corner_radius)
             [p[1] - (height - corner_radius), p[0]]
           ];
           all_points = concat(
@@ -177,7 +177,7 @@ module corner_t(
               }
         }
       }
-      translate([thickness, -depth + height + corner_radius, corner_radius]) 
+      translate([thickness, -depth + height + corner_radius, corner_radius])
         rotate([0, -90, 0])
           linear_extrude(height=thickness * 2) {
             offset(r=corner_radius) {
