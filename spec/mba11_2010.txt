@@ -7,3 +7,12 @@ Width:
     11.8 inches (29.95 cm)
 Depth:
     7.56 inches (19.2 cm)
+
+Hinge to nearer end of mini display port: 11mm
+Width of mini display port: 8mm (male port 7.5mm)
+Gap between mini display port and usb-a port: 5mm
+Wdith of usb-A port: 12.6mm (male port 12mm)
+
+Cable dimension (wrapper around ports) of {mini-display + usb} -> {Dual-link DVI + USB}
+mini-display: 11 * 8 * 16
+usb-a: 14.7 * 7 * 16
