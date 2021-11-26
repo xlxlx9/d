@@ -12,10 +12,10 @@ module case_mba11(
   , edge_front=4.9
   , edge_back=3
   , corner_radius=9
-  , al = 1.05
+  , al = 1.0
   , bl = 0.75
-  , ar = 0.95
-  , br = 0.66
+  , ar = 1.0
+  , br = 0.75
   , ptt2 = 2
   , pth3 = 22
   , psink = 0.6
