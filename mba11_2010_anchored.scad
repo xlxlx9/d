@@ -106,13 +106,14 @@ difference() {
 }
 
 // test case fit
-*translate([-15, 22, 0.475 * BASE_WIDTH])
-  cube([124, 60, 0.75 * BASE_WIDTH], center=true);
+#translate([-15, 22, 0.44 * BASE_WIDTH])
+  cube([124, 60, 0.9 * BASE_WIDTH], center=true);
 
 // test cable reach
-*rotate([0, 0, extra_deg])
+rotate([0, 0, extra_deg])
   cube([74, 60, 2 * BASE_WIDTH], center=true);
-*cube([56, 56, 2 * BASE_WIDTH], center=true);
+translate([5, 0, 0])
+  cube([44, 82, 2 * BASE_WIDTH], center=true);
 
 // test clip on back plate
 *translate([-40, -45, 0]) cube([50, 50, 50]);
