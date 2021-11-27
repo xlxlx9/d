@@ -27,12 +27,12 @@ BASE_BUMP_HEIGHT = 2.2;
 USBC_1_WIDTH=10.75;
 USBC_1_PORT_WIDTH = 8;
 USBC_1_DEPTH=7.8 /*v4*/ - 0.2;
-USBC_1_HEIGHT=16;
+USBC_1_HEIGHT=16 /*v6*/ + 0.5;
 
 USBC_2_WIDTH=14.7 + /*v3*/ + 0.3 /*v4*/ - 0.2;
 USBC_2_PORT_WIDTH = 12.6;
 USBC_2_DEPTH=7 + /*v3*/ + 0.2 /*v4*/ - 0.1;
-USBC_2_HEIGHT=16;
+USBC_2_HEIGHT=16 /*v6*/ + 1;
 
 USBC_1_DY=-(11 + USBC_1_PORT_WIDTH / 2) - 2.5 /*v4*/ - 0.3;
 USBC_1_DX=-0.95 /*v3*/- 0.5 /*v4*/ + 0.25;
