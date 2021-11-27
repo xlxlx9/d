@@ -1,4 +1,5 @@
 use <comp/cloud.scad>;
+use <comp/screw.scad>;
 //use <comp/prezel.scad>;
 use <laptop_mba11.scad>;
 
@@ -89,16 +90,23 @@ difference() {
           cylinder(r=30, h=FINGER_R * 2 + 5, center=true);
       }
     }
+    // screw tunnels 1
+    translate([49, 4, BASE_WIDTH / 2 + 3])
+      rotate([-60, 0, 10]) screw_subtract(h1=15, h0=60);
+    // screw tunnels 2
+#    translate([12, 2, BASE_WIDTH / 2 - 3])
+      rotate([-120, 0, -15]) screw_subtract(h1=15, h0=60);
+
   // test cable alignment
-    rotate([0, 0, extra_deg])
+*    rotate([0, 0, extra_deg])
       cube([40, 90, 2 * BASE_WIDTH], center=true);
-    rotate([0, 0, extra_deg])
+*    rotate([0, 0, extra_deg])
       translate([78 + 6, 0, BASE_WIDTH / 2])
       cube([50, 150, 2 * BASE_WIDTH], center=true);
 }
 
 // test case fit
-translate([-15, 22, 0.475 * BASE_WIDTH])
+*translate([-15, 22, 0.475 * BASE_WIDTH])
   cube([124, 60, 0.75 * BASE_WIDTH], center=true);
 
 // test cable reach
