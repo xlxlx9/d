@@ -1,0 +1,5 @@
+cable stem in mm
+
+w: 12.4
+d: 6.65
+h: 24
