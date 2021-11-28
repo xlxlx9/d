@@ -10,33 +10,25 @@ extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
 
 // hollow for cable observing  usbc_extend_top
 HW_R = 6;
-HW_DIST = 8;
+HW_DIST = 6;
 FINGER_R = 12;
 
 intersection() {
 
 difference() {
-  union() {
-
-    // Use cloud shape as closure
-    difference() {
-      translate([15, -BASE_BUMP_HEIGHT, 0])
-        rotate([0, 0, 0]) cloud_xy(
-            thickness=BASE_WIDTH
-          , r1=23
-          , r2=22
-          , r3=29
-          , r4=18
-        );
-      // do not intrude plate insert
-      translate([-30, -BASE_PLATE_SINK - BASE_ROTATE_RADIUS, -BASE_WIDTH * 3])
-        cube([30, BASE_ROTATE_RADIUS, 6 * BASE_WIDTH]);
-    }
-  }
+  // Use cloud shape as closure
+  translate([15, -BASE_BUMP_HEIGHT, 0])
+    rotate([0, 0, 0]) cloud_xy(
+        thickness=BASE_WIDTH
+      , r1=23
+      , r2=10
+      , r3=20
+      , r4=12
+    );
   // laptop corner, cable support, and tunnel
   rotate([180 + extra_deg, -90, 0])
     //translate([30, 0, 0])
-    translate([15, 35 - 18, 37 - 7]) union() {
+    translate([15, 35 - 18 - 7, 37 - 7 - 6]) union() {
       case_mba11(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
@@ -91,8 +83,8 @@ difference() {
       }
     }
     // screw tunnels 1
-    translate([49, 4, BASE_WIDTH / 2 + 3])
-      rotate([-60, 0, 15]) screw_subtract(h1=15, h0=60, r0=4.2, r1=1.8, hc=2.75);
+    translate([40, 4, BASE_WIDTH / 2 + 3])
+      rotate([-60, 0, 5]) screw_subtract(h1=15, h0=60, r0=4.2, r1=1.8, hc=2.75);
     // screw tunnels 2
 #    translate([15, 2, BASE_WIDTH / 2 - 3])
       rotate([-120, 0, -20]) screw_subtract(h1=15, h0=60, r0=4.2, r1=1.8, hc=2.75);
