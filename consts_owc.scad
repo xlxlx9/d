@@ -1,4 +1,5 @@
 
 USBC_2_HEIGHT=24;
 USBC_2_WIDTH = 12.2;
-USBC_2_DEPTH = 6.3;
+USBC_2_DEPTH = /*v2m*/6.3;
+USBC_2_XYR =  /*v3m*/ 2.75;

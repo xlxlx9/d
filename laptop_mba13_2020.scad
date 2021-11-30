@@ -13,9 +13,9 @@ module case_mba13(
   , edge_back=3
   , corner_radius=9
   , al = 1.1 /*v2m*/ - 0.1
-  , bl = 0.8
-  , ar = 1.0
-  , br = 0.75
+  , bl = 0.7
+  , ar = 0.89
+  , br = 0.85
   , ptt2 = 2
   , pth3 = 22
   , psink = 0.6
