@@ -37,10 +37,10 @@ USBC_2_DEPTH = 6;
 
 
 USBC_1_DY=/*v1m measured*/-21.9;
-USBC_1_DX=-0.95 /*v3*/- 0.5 /*v4*/ + 0.25 /*v1m*/ + 0.5;
+USBC_1_DX=-0.95 /*v3*/- 0.5 /*v4*/ + 0.25 /*v1m*/ + 0.5 /*v2m*/ - 0.25;
 
-USBC_2_DY=USBC_1_DY /*v1m measured*/ - 14.6;
-USBC_2_DX=-0.95 + 0.7;
+USBC_2_DY=USBC_1_DY /*v1m measured*/ - 14.6 /*v2m*/ - 0.3;
+USBC_2_DX=-0.95 + 0.7 /*v2m*/ - 0.7;
 
 USBC_1_XYR = 3;
 USBC_2_XYR = 3;

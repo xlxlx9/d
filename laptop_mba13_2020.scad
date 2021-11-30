@@ -12,7 +12,7 @@ module case_mba13(
   , edge_front=4.9
   , edge_back=3
   , corner_radius=9
-  , al = 1.1
+  , al = 1.1 /*v2m*/ - 0.1
   , bl = 0.8
   , ar = 1.0
   , br = 0.75
@@ -45,7 +45,7 @@ module case_mba13(
 ) {
   union() {
     intersection() {
-      rotate([0, 0, angle / 2])
+      rotate([0, 0, angle * 0])
       //corner(
       corner_t(
           width=width
@@ -67,7 +67,7 @@ module case_mba13(
         , delicate=delicate
         , fn=fn
       );
-      rotate([0, 0, -angle / 2])
+      rotate([0, 0, -angle * 1])
       corner_t(
           width=width
         , depth=depth

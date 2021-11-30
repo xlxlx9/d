@@ -85,22 +85,23 @@ translate([15, -BASE_BUMP_HEIGHT, 0])
       }
     }
     // screw tunnels 1
-    translate([15, 2, BASE_WIDTH / 2 + 3])
+    *translate([15, 2, BASE_WIDTH / 2 + 3])
       rotate([-60, 0, 15]) screw_subtract(h1=15, h0=60, r0=4.2, r1=1.8, hc=2.75);
     // screw tunnels 2
-    #translate([40, 2.5, BASE_WIDTH / 2])
+    *translate([40, 2.5, BASE_WIDTH / 2])
       rotate([-90, 0, -15]) screw_subtract(h1=15, h0=60, r0=4.2, r1=1.8, hc=2.75);
 
   // test cable alignment
-*    rotate([0, 0, extra_deg])
+    rotate([0, 0, extra_deg])
       cube([40, 90, 2 * BASE_WIDTH], center=true);
-*    rotate([0, 0, extra_deg])
-      translate([78 + 6, 0, BASE_WIDTH / 2])
+    rotate([0, 0, extra_deg])
+      translate([78 + 6 - 45, -90, BASE_WIDTH / 2])
       cube([50, 150, 2 * BASE_WIDTH], center=true);
+#    cube([50, 20, 50]);
 }
 
 // test case fit
-*translate([-15, 22, 0.44 * BASE_WIDTH])
+translate([-15, 22, 0.475 * BASE_WIDTH])
   cube([124, 60, 0.9 * BASE_WIDTH], center=true);
 
 // test cable reach
