@@ -1,5 +1,6 @@
 use <comp/anchor.scad>;
-//use <comp/cloud.scad>;
+use <comp/cloud.scad>;
+use <comp/screw.scad>;
 //use <comp/prezel.scad>;
 use <laptop.scad>;
 
@@ -9,11 +10,18 @@ include <variants/model_16in_2019.scad>;
 //include <variants/cr10.scad>
 // comment if print without rotating
 include <variants/prusa_mk3_16in.scad>
+include <consts_owc.scad>;
 //include <variants/cr10_fc.scad>
 //include <variants/power_cable_only.scad>
 
+// rename consts from prusa_mk3_16in
+USBC_1_WIDTH = USBC_WIDTH_1;
+USBC_1_DEPTH = USBC_DEPTH_1;
+
 $fn = 128;
 extra_deg = atan2(CASE_WIDTH, CASE_DEPTH);
+
+BASE_WIDTH = 1.1 * CASE_HEIGHT + 8;
 
 //BASE_FRONT_EXT = 15;
 BASE_FRONT_EXT = 40;
@@ -29,33 +37,18 @@ FINGER_R = 9;
 intersection() {
 
 difference() {
-  union() {
-    anchor(
-        width=BASE_WIDTH
-      , height_above_surface = BASE_HEIGHT_ABOVE_SURFACE
-      , rotate_radius = BASE_ROTATE_RADIUS
-      , front_extension_depth = BASE_FRONT_EXT
-      , back_extension_depth = BASE_BACK_EXT
-      , back_extension_under = BASE_BACK_UNDER
-      , back_plate_height = BASE_PLATE_HEIGHT
-      , back_plate_sink = BASE_PLATE_SINK
-      , back_height_under = 13.2
-      , r = BASE_EDGE_RADIUS
+  translate([15, -BASE_BUMP_HEIGHT, 0])
+    rotate([0, 0, 0]) cloud_xy(
+        thickness=BASE_WIDTH
+        , r1=23
+        , r2=12
+        , r3=20
+        , r4=12
     );
-
-  }
-  // Meta logo ingraving
-*  translate([30, 30, -1]) linear_extrude(height=3)
-    scale(0.4) {
-      translate([-4.25, 0, 0])
-        hollow(w=8);
-      translate([4.25, 0, 0]) mirror([-1, 0, 0])
-        hollow(w=8);
-    }
   // laptop corner, cable support, and tunnel
-#  translate([-18, 34.985, 0]) rotate([180/* + extra_deg*/, -90, 0])
+#  translate([-18, 34.985, -2]) rotate([180 + extra_deg, -90, 0])
     //translate([30, 0, 0])
-    translate([15, 35, 37]) union() {
+    translate([15, 53, 5]) union() {
       case_ss(
           depth=CASE_DEPTH
         , width=CASE_WIDTH
@@ -63,10 +56,10 @@ difference() {
         , edge_front=CASE_EDGE_FRONT
         , edge_back=CASE_EDGE_BACK
         , corner_radius=CASE_CORNER_R
-        , usbc_1_width=USBC_WIDTH
-        , usbc_1_depth=USBC_DEPTH
-        , usbc_2_width=USBC_WIDTH
-        , usbc_2_depth=USBC_DEPTH
+        , usbc_1_width=USBC_1_WIDTH
+        , usbc_1_depth=USBC_1_DEPTH
+        , usbc_2_width=USBC_2_WIDTH
+        , usbc_2_depth=USBC_2_DEPTH
         , usbc_1_height=USBC_1_HEIGHT
         , usbc_2_height=USBC_2_HEIGHT
         , usbc_1_dy=USBC_1_DY
@@ -108,49 +101,31 @@ difference() {
             square([USBC_WIDTH, USBC_DEPTH * 1.5], center=true);
           }
         }
-      // widen tunnel
-      translate([USBC_1_DX, -20, -27]) rotate([0, 90, 0])
-        linear_extrude(height=USBC_WIDTH + USBC_TUNNEL_XY_PADDING * 2, center=true) union() {
-          union() {
-            difference() {
-              circle(32);
-              hull() {
-                translate([-0.7, 0, 0])
-                  circle(10);
-                translate([0.7, 0, 0])
-                  circle(10);
-              }
-              rotate([0, 0, -extra_deg]) translate([-100, 0])
-                square([200, 200]);
-              mirror([1, 0, 0]) translate([0, -100])
-                square([200, 200]);
-            }
-          }
-          rotate([0, 0, 90 - extra_deg]) translate([-1, -11 + 0.7])
-            mirror([0, 1, 0]) square([65, 14.7]);
-        }
       // push by finger
-      translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 - 5]) intersection() {
+      translate([USBC_1_DX , (USBC_1_DY + USBC_2_DY) / 2, -8 -9]) difference() {
         translate([0, 0, -2])
         mirror([0, 0, 1])
           cylinder(r=FINGER_R, h=USBC_1_HEIGHT + 18);
-        translate([0, -2, -4.32 + 5]) rotate([0, 90, 0])
-          cylinder(r=30, h=FINGER_R * 2 + 5, center=true);
+        translate([0, -29, -5])
+          cylinder(r=30, h=12, center=true);
       }
     }
-  // make room for bump
-  translate([BASE_ROTATE_RADIUS - 0.05, -BASE_BUMP_HEIGHT - 10, -5])
-    cube([BASE_BUMP_DEPTH + 0.05, BASE_BUMP_HEIGHT + 10, BASE_WIDTH + 10]);
+    // screw tunnels 1
+*    translate([40, 4, BASE_WIDTH / 2 + 3])
+      rotate([-60, 0, 5]) screw_subtract(h1=15, h0=60, r0=4.2, r1=1.8, hc=2.75);
+    // screw tunnels 2
+*    translate([15, 2, BASE_WIDTH / 2 - 3])
+      rotate([-120, 0, -20]) screw_subtract(h1=15, h0=60, r0=4.2, r1=1.8, hc=2.75);
   // test cable alignment
-*    rotate([0, 0, extra_deg])
-      cube([40, 70, 2 * BASE_WIDTH], center=true);
-*    rotate([0, 0, extra_deg])
-      translate([68, 0, BASE_WIDTH / 2])
-      cube([30, 150, 2 * BASE_WIDTH], center=true);
+    rotate([0, 0, extra_deg])
+      cube([40, 86, 2 * BASE_WIDTH], center=true);
+    rotate([0, 0, extra_deg])
+      translate([48, -50, BASE_WIDTH / 2])
+      cube([80, 50, 2 * BASE_WIDTH], center=true);
 }
 
 // test case fit
-*translate([35, 42, 0])
+#translate([30, 42, 0])
   cube([114, 60, 2 * BASE_WIDTH], center=true);
 
 // test cable reach
