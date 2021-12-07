@@ -83,7 +83,7 @@ difference() {
       }
     }
     // screw tunnels 1
-#    translate([15, 4, BASE_WIDTH / 2 + 3])
+    translate([15, 4, BASE_WIDTH / 2 + 3])
       rotate([-60, 0, -45]) screw_subtract(h1=15, h0=60, r0=4.2, r1=1.8, hc=2.75);
     // screw tunnels 2
     translate([40, 2, BASE_WIDTH / 2])
@@ -91,14 +91,14 @@ difference() {
 
   // test cable alignment
 *    rotate([0, 0, extra_deg])
-      cube([40, 90, 2 * BASE_WIDTH], center=true);
+      cube([40 - 5, 90, 2 * BASE_WIDTH], center=true);
 *    rotate([0, 0, extra_deg])
-      translate([78 + 6, 0, BASE_WIDTH / 2])
+      translate([38, -88, BASE_WIDTH / 2])
       cube([50, 150, 2 * BASE_WIDTH], center=true);
 }
 
 // test case fit
-*translate([-15, 22, 0.44 * BASE_WIDTH])
+*translate([15, 22 + 26, 0.5 * BASE_WIDTH])
   cube([124, 60, 0.9 * BASE_WIDTH], center=true);
 
 // test cable reach

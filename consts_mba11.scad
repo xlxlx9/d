@@ -7,7 +7,7 @@ CASE_CORNER_RADIUS = 11;
 CASE_CURVE_WIDTH = 30;
 CASE_EDGE_FRONT = 5 /*v8*/ + 0.3;
 CASE_EDGE_BACK = 5 /*v4*/ - 0.4;
-CASE_CORNER_R = 8;
+CASE_CORNER_R = 8 /*v9*/ + 2;
 
 
 // Base anchor
@@ -38,7 +38,7 @@ USBC_1_DY=-(11 + USBC_1_PORT_WIDTH / 2) - 2.5 /*v4*/ - 0.3;
 USBC_1_DX=-0.95 /*v3*/- 0.5 /*v4*/ + 0.25 /*v7*/ + 0.55;
 
 USBC_2_DY=USBC_1_DY - 5 /*Gap between ports*/ - USBC_1_PORT_WIDTH / 2 - USBC_2_PORT_WIDTH / 2;
-USBC_2_DX=-0.95 /*v7*/ + 0.55 /*v8*/ - 0.25;
+USBC_2_DX=-0.95 /*v7*/ + 0.55 /*v8*/ - 0.25 /*v9*/ + 0.125;
 
 USBC_1_XYR = 1.2;
 USBC_2_XYR = 2;
@@ -47,6 +47,6 @@ USBC_TUNNEL_XY_PADDING=0.4;
 
 // pad sliding track
 PAD_SINK=0.4;
-PAD_DY = -7 /*v7*/ - 2.5 /*v8*/ + 1;
+PAD_DY = -7 /*v7*/ - 2.5 /*v8*/ + 1 /*v10*/ + 0.75;
 PAD_DZ = 14.75 /*v8*/ - 1;
 PAD_TH2 = 3.2 /*v8*/ + 0.8;
